@@ -2,14 +2,32 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.8'
 
+gem 'devise'
+
 gem 'bootstrap-sass'
+
+gem "therubyracer"
+gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
 
 gem 'bcrypt-ruby', '3.0.1'
 
 gem 'faker', '1.0.1'
 
+gem 'simple-private-messages', '0.0.0', :git => 'git://github.com/jongilbraith/simple-private-messages.git'
+
+gem "rinku", :require => "rails_rinku"
+
+# Rinku.auto_link(text, mode=:all, link_attr=nil, skip_tags=nil)
+# Rinku.auto_link(text, mode=:all, link_attr=nil, skip_tags=nil) { |link_text| ... }
+
 gem 'will_paginate', '3.0.3'
 gem 'bootstrap-will_paginate', '0.0.6'
+
+gem 'twitter-text'
+
+gem 'twitter'
+
+gem "socialization"
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -35,7 +53,7 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-gem 'jquery-rails'
+gem "jquery-rails", "~> 2.1.4"
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

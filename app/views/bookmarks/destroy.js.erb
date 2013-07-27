@@ -1,0 +1,2 @@
+$("#bookmark_form").html("<%= escape_javascript(render('users/bookmark')) %>")
+$("#bookmarkers").html('<%= @user.bookmarkers.count %>')

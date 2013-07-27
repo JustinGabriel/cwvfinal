@@ -1,0 +1,6 @@
+<%= form_for(current_user.bookmarks.find_by_bookmarked_id(@user),
+             html: { method: :delete }) do |f| %>
+              <%= button_tag do %>
+<div id="recommend" class="tips icon-btn-unstar" title="Unrecommend" data-placement="bottom"><a href="#" class="glyphicons white star"><i></i></a></div>
+<% end %>
+<% end %>

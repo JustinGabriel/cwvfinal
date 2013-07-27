@@ -1,4 +1,4 @@
-equire 'spec_helper'
+require 'spec_helper'
 
 describe User do
     
@@ -18,14 +18,26 @@ describe User do
     it { should respond_to(:admin) }
     it { should respond_to(:authenticate) }
     it { should respond_to(:microposts) }
+    it { should respond_to(:schools) }
     it { should respond_to(:feed) }
+<<<<<<< HEAD
     it { should respond_to(:relationships) }
+    it { should respond_to(:bookmarks) }
+    it { should respond_to(:bookmarked_users) }
+    it { should respond_to(:bookmarkers) }
+=======
+    it { should respond_to(:bookmarks) }
+>>>>>>> 881ee705febd4004d6343ba22e02d84535086797
     it { should respond_to(:followed_users) }
-    it { should respond_to(:reverse_relationships) }
+    it { should respond_to(:reverse_bookmarks) }
     it { should respond_to(:followers) }
     it { should respond_to(:following?) }
     it { should respond_to(:follow!) }
     it { should respond_to(:unfollow!) }
+    it { should respond_to(:bookmarking?) }
+    it { should respond_to(:bookmark!) }
+    it { should respond_to(:unbookmark!) }
+    it { should have_private_messages }
     
     it { should be_valid }
     it { should_not be_admin }
@@ -152,7 +164,29 @@ describe User do
                 Micropost.find_by_id(micropost.id).should be_nil
             end
         end
+        end
+    describe "school associations" do
         
+        before { @user.save }
+        let!(:older_school) do
+            FactoryGirl.create(:school, user: @user, created_at: 1.day.ago)
+        end
+        let!(:newer_school) do
+            FactoryGirl.create(:school, user: @user, created_at: 1.hour.ago)
+        end
+        
+        it "should have the right schools in the right order" do
+            @user.schools.should == [newer_school, older_school]
+        end
+        
+        it "should destroy associated schools" do
+            schools = @user.schools
+            @user.destroy
+            schools.each do |school|
+                School.find_by_id(school.id).should be_nil
+            end
+        end
+    end
         describe "status" do
             let(:unfollowed_post) do
                 FactoryGirl.create(:micropost, user: FactoryGirl.create(:user))
@@ -197,4 +231,27 @@ describe User do
             its(:followed_users) { should_not include(other_user) }
         end
     end
+describe "bookmarking" do
+    let(:other_user) { FactoryGirl.create(:user) }
+    before do
+        @user.save
+        @user.bookmark!(other_user)
+    end
+    
+    it { should be_bookmarking(other_user) }
+    its(:bookmarked_users) { should include(other_user) }
+    
+    describe "bookmarked user" do
+        subject { other_user }
+        its(:bookmarkers) { should include(@user) }
+    end
+    
+    describe "and unbookmarking" do
+        before { @user.unbookmark!(other_user) }
+        
+        it { should_not be_bookmarking(other_user) }
+        its(:bookmarked_users) { should_not include(other_user) }
+    end
+end
+
 end

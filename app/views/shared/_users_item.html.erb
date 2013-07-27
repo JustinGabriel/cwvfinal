@@ -1,0 +1,10 @@
+<li id="<%= users_item.id %>">
+    <span class="user">
+    <i class="icon-user"></i>   <%= users_item.author %>
+    </span>
+   </br>
+    <span class="timestamp">
+        Submitted <%= time_ago_in_words(users_item.created_at) %> ago.
+    </span>
+    
+</li>

@@ -1,0 +1,487 @@
+<% provide(:title, 'Recruiters') %>
+ 
+
+
+      <div class="row" id="content">
+
+        <!-- MAIN CONTENT -->
+              	
+	 <!-- Sidebar placed on the LEFT of the screen -->
+        <div class="span3 sleft" id="sidebar">
+          <div class="sidebar-nav equal hidden-phone">
+            <ul class="nav nav-list affix" id="resumenav">
+              <li><a href="#about-me" class="scroller">About me</a></li>
+              <li><a href="#personal-information" class="scroller">Personal Info</a></li>
+              <li><a href="#employment" class="scroller">Employment</a></li>
+              <li><a href="#education" class="scroller">Education</a></li>
+              <li><a href="#skills" class="scroller">Skills</a></li>
+              <li><a href="#testimonials" class="scroller">Testimonials</a></li>
+              <li><a href="#hobbies" class="scroller">Hobbies</a></li>
+              <li><a href="#portfolio" class="scroller">Portfolio</a></li>
+              <li><a href="#blog" class="scroller">Blog</a></li>
+              <li><a href="#contact" class="scroller">Contact</a></li>
+            </ul>
+          </div>
+      </div>
+        <div class="span10 equal" id="main-content">
+        
+        	<div class="tools noprint visible-desktop">
+				<a href="javascript:if(window.print)window.print()" title="Print" data-placement="bottom" class="tips glyphicons print"><i></i></a>
+				<a href="#" title="Share" id="share" data-toggle="popover" data-placement="right" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." data-original-title="Popover on left" class="tips glyphicons share"><i></i></a>
+			</div>
+
+        
+        	<div class="section first-section" id="about-me">
+	            <div class="row author">
+	            	<div class="span3">
+	            		<%= gravatar_for @user, size: 160 %>
+	            	</div>
+	            	<div class="span6">
+				    	<h1><%= @user.name %></h1>
+				   		<h2 class="primary-color"> <i class="icon-user"></i> <% unless current_user?(@user) %> <%= @user.status.blank? ? "We'll get those TPS reports soon" : @user.status %>
+         <% else %>
+  <%= link_to "College Student or Young Professional?", edit_user_path(current_user) if @user.status.blank? %>
+         <%= @user.status %>
+         
+         <% end %>
+</h2>
+                         <p> <i class="icon-briefcase"></i> <% unless current_user?(@user) %> <%= @user.industry.blank? ? "No industry selected" : @user.industry %>
+         <% else %>
+         <%= link_to "What is your industry or major?", edit_user_path(current_user) if @user.industry.blank? %>
+         <%= @user.industry %>
+         <% end %>
+</p>
+<p><i class="icon-globe"></i> <% unless current_user?(@user) %> <%= @user.location.blank? ? "No location listed" : @user.location%>
+         <% else %>
+         <%= link_to "Where are you?", edit_user_path(current_user) if @user.location.blank? %>
+         <%= @user.location %>
+         <% end %>
+
+</p>
+                          <%= render 'shared/stats' %>
+                      
+				   	</div>
+				</div>
+			
+						
+				
+				<div class="well">
+					<h3>I am Senior UX designer @ <a href="#">XYZCompany.com</a></h3>
+					<p class="lead"><% unless current_user?(@user) %> <%= @user.about.blank? ? "No Summary" : @user.about %>
+         <% else %>
+         <%= link_to "Add a summary", edit_user_path(current_user) if @user.about.blank? %>
+         <%= @user.about %>
+         <% end %>
+
+</p>
+				</div>
+								<div class="social-media">
+					<h5>Follow me</h5>
+					<div>
+                   <div>  <a data-toggle="modal" href="#message" class="btn btn-block btn-success"><i class="icon-envelope icon-white"></i> Message <%= @user.name %> </a></div>
+						<div class="tips icon-btn" title="Facebook" data-placement="top"><a href="#" class="glyphicons white facebook"><i></i></a></div>
+						<div class="tips icon-btn" title="Twitter" data-placement="top"><a href="#" class="glyphicons white twitter"><i></i></a></div>
+						<div class="tips icon-btn" title="Linkedin" data-placement="top"><a href="#" class="glyphicons white linked_in"><i></i></a></div>
+					</div>
+				</div>		
+			</div>
+            
+            <div class="section" id="personal-information">
+	            <h2 class="section-title"><span class="glyphicons user"><i></i></span>Personal Information<a href="#phone-navbar" class="top visible-phone"><span class="glyphicons white up_arrow"><i></i></span></a></h2>
+				
+				<div class="row">
+	        		<div class="infoline span9 first"><div class="row">
+	            		<div class="span2 muted">Date of birth</div>
+	            		<div class="span7">January 3rd, 1975</div>
+				  	</div></div>
+				  	<span class="clear"></span>
+				  	
+	        		<div class="infoline span9"><div class="row">
+					  	<div class="span2 muted">Address</div>
+					  	<div class="span7">
+					  		99, Amazing Street<br/>
+					  		New York<br/>
+					  		USA
+					  	</div>
+					</div></div>
+				  	<span class="clear"></span>
+				  	
+	        		<div class="infoline span9"><div class="row">
+				  		<div class="span2 muted">Email</div>
+				  		<div class="span7">john.doe@mymail.com</div>
+				  	</div></div>
+				  	<span class="clear"></span>
+				  	
+	        		<div class="infoline span9"><div class="row">
+					  	<div class="span2 muted">Phone</div>
+					  	<div class="span7">
+					  		974 441 568<br/>
+					  		732 576 274
+					  	</div>
+					</div></div>
+				  	<span class="clear"></span>
+				  	
+	        		<div class="infoline span9 last"><div class="row">
+					  	<div class="span2 muted">Website</div>
+					  	<div class="span7"><a href="http://www.mysite.com" title="">myamazingwebsite.com</a></div>
+					</div></div>
+
+			  
+			  	</div>
+		  	</div><!--/section--> 
+		  	
+		  	<div class="section" id="employment">
+			  	<h2 class="section-title"><span class="glyphicons share_alt"><i></i></span>Employment<a href="#phone-navbar" class="top visible-phone"></a></h2>
+			  	
+			  	<div class="timeline">
+			  		
+		  			 <div class="timeline-item">
+		  			 	<div class="timeline-item-date">2011 - now</div>
+		  			 	<div class="timeline-item-trigger"><span class="glyphicons white circle_plus" data-toggle="collapse" data-target="#position1"><i></i></span></div>
+		  			 	<div class="timeline-arrow"><i></i></div>
+		  			 	<div class="timeline-item-content">
+							<h3 class="timeline-item-title" data-toggle="collapse" data-target="#position1">Senior UX Designer @ Company</h3>
+							<div class="collapse in" id="position1">
+								<p><small class="muted">from 2011 to present day</small></p>
+								<h4 class="media-heading primary-color">Lorem ipsum dolor sit amet</h4>
+								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tincidunt diam ac lectus tristique scelerisque. Quisque vitae libero sit amet turpis faucibus auctor eget vitae tortor. Aenean metus erat, ultricies non mattis quis, molestie ac massa. Sed sollicitudin erat ac dui viverra a posuere eros adipiscing. Phasellus nisi lectus, imperdiet sed hendrerit ac, dictum quis sem. Phasellus vel nisi non massa elementum porta. Aliquam erat volutpat.</p>	
+								<p><a href="#" title="" >&rarr; View website</a></p>
+							</div>
+						</div>
+					 </div><!--/timeline-item--> 
+					 <span class="clear"></span>
+					 
+					 <div class="timeline-item">
+		  			 	<div class="timeline-item-date">2010 - 2011</div>
+		  			 	<div class="timeline-item-trigger"><span class="glyphicons white circle_plus" data-toggle="collapse" data-target="#position2"><i></i></span></div>
+		  			 	<div class="timeline-arrow"><i></i></div>
+		  			 	<div class="timeline-item-content">
+							<h3 class="timeline-item-title" data-toggle="collapse" data-target="#position2">Junior UX Designer @ Company</h3>
+							<div class="collapse" id="position2">
+								<p><small class="muted">from 2010 to 2011</small></p>
+								<h4 class="media-heading primary-color">Lorem ipsum dolor sit amet</h4>
+								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tincidunt diam ac lectus tristique scelerisque. Quisque vitae libero sit amet turpis faucibus auctor eget vitae tortor. Aenean metus erat, ultricies non mattis quis, molestie ac massa. Sed sollicitudin erat ac dui viverra a posuere eros adipiscing. Phasellus nisi lectus, imperdiet sed hendrerit ac, dictum quis sem. Phasellus vel nisi non massa elementum porta. Aliquam erat volutpat.adipiscing elit. Proin tincidunt diam ac lectus tristique scelerisque. Quisque vitae libero sit amet turpis faucibus auctor eget vitae tortor. Aenean metus erat, ultricies non mattis quis, molestie ac massa. Sed sollicitudin erat ac dui viverra a posuere eros adipiscing. Phasellus nisi lectus, imperdiet sed hendrerit ac, dictum quis sem. Phasellus vel nisi non massa elementum adipiscing elit. Proin tincidunt diam ac lectus tristique scelerisque. Quisque vitae libero sit amet turpis faucibus auctor eget vitae tortor. Aenean metus erat, ultricies non mattis quis, molestie ac massa. Sed sollicitudin erat ac dui viverra a posuere eros adipiscing. Phasellus nisi lectus, imperdiet sed hendrerit ac, dictum quis sem. Phasellus vel nisi non massa elementum </p>	
+							</div>
+						</div>
+					 </div><!--/timeline-item--> 
+					 <span class="clear"></span>
+					 
+					 <div class="timeline-item">
+		  			 	<div class="timeline-item-date">2009 - 2010</div>
+		  			 	<div class="timeline-item-trigger"><span class="glyphicons white circle_plus" data-toggle="collapse" data-target="#position3"><i></i></span></div>
+		  			 	<div class="timeline-arrow"><i></i></div>
+		  			 	<div class="timeline-item-content">
+							<h3 class="timeline-item-title" data-toggle="collapse" data-target="#position3">Webdesigner @ Studioprod</h3>
+							<div class="collapse" id="position3">
+								<p><small class="muted">from october 2009 to 2010</small></p>
+								<h4 class="media-heading primary-color">Lorem ipsum dolor sit amet</h4>
+								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tincidunt diam ac lectus tristique scelerisque. Quisque vitae libero sit amet turpis faucibus auctor eget vitae tortor. Aenean metus erat, ultricies non mattis quis, molestie ac massa. Sed sollicitudin erat ac dui viverra a posuere eros adipiscing. Phasellus nisi lectus, imperdiet sed hendrerit ac, dictum quis sem. Phasellus vel nisi non massa elementum porta. Aliquam erat volutpat.</p>	
+							</div>
+						</div>
+					 </div><!--/timeline-item--> 
+					 <span class="clear"></span>
+					 
+					 <div class="timeline-item">
+		  			 	<div class="timeline-item-date">2008 - 2009</div>
+		  			 	<div class="timeline-item-trigger"><span class="glyphicons white circle_plus" data-toggle="collapse" data-target="#position4"><i></i></span></div>
+		  			 	<div class="timeline-arrow"><i></i></div>
+		  			 	<div class="timeline-item-content">
+							<h3 class="timeline-item-title" data-toggle="collapse" data-target="#position4">Designer @ Creativecompany</h3>
+							<div class="collapse" id="position4">
+								<p><small class="muted">from 2008 to 2009</small></p>
+								<h4 class="media-heading primary-color">Lorem ipsum dolor sit amet</h4>
+								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tincidunt diam ac lectus tristique scelerisque. Quisque vitae libero sit amet turpis faucibus auctor eget vitae tortor. Aenean metus erat, ultricies non mattis quis, molestie ac massa. Sed sollicitudin erat ac dui viverra a posuere eros adipiscing. Phasellus nisi lectus, imperdiet sed hendrerit ac, dictum quis sem. Phasellus vel nisi non massa elementum porta. Aliquam erat volutpat.</p>	
+							</div>
+						</div>
+					 </div><!--/timeline-item--> 
+					 <span class="clear"></span>
+		  			 
+			  	</div><!--/timeline --> 
+			</div><!--/section-->
+		  	
+		  	
+		  	<div class="section" id="education">
+			  	<h2 class="section-title"><span class="glyphicons certificate"><i></i></span>Education<a href="#phone-navbar" class="top visible-phone"><span class="glyphicons white up_arrow"><i></i></span></a></h2>
+			  	<% if @user.schools.any? %>
+      <ol class="schools">
+        <%= render @schools %>
+      </ol>
+      <%= will_paginate @schools %>
+    <% end %> 
+ 
+		  	</div><!--/section-->
+		  
+		  	
+		  	<div class="section" id="testimonials">
+			  	<h2 class="section-title"><span class="glyphicons comments"><i></i></span>Testimonials<a href="#phone-navbar" class="top visible-phone"><span class="glyphicons white up_arrow"><i></i></span></a></h2>
+			  	
+			  	<div class="testimonial">
+	
+										</div>
+			
+			</div><!--/section-->
+			
+			<div class="section hobbies" id="hobbies">
+		  		<h2 class="section-title"><span class="glyphicons heart_empty"><i></i></span>Hobbies<a href="#phone-navbar" class="top visible-phone"><span class="glyphicons white up_arrow"><i></i></span></a></h2>
+			  	
+			  	<div class="row">
+			  		<div class="span9">
+			  			 <% if @user.microposts.any? %>
+      <h2>Recent Activity (<%= @user.microposts.count %>)</h2>
+      <ol class="microposts">
+        <%= render @microposts %>
+      </ol>
+<%= will_paginate @microposts %>
+     <% else %> 
+    <% end %>
+
+			  		</div>
+			  	</div>
+			  	
+		  	</div><!--/section-->
+			
+			
+			<div class="section clearfix" id="portfolio">
+				<h2 class="section-title"><span class="glyphicons show_thumbnails"><i></i></span>Portfolio<a href="#phone-navbar" class="top visible-phone"><span class="glyphicons white up_arrow"><i></i></span></a></h2>
+			
+				<ul class="nav nav-pills" id="portfolio-filters">
+					<li class="active"><a href="#" data-filter="*">All</a></li>
+					<li><a href="#" data-filter=".portfolio-type1">Type 1</a></li>
+					<li><a href="#" data-filter=".portfolio-type2">Type 2</a></li>
+					<li><a href="#" data-filter=".portfolio-type3">Type 3</a></li>
+				</ul>
+			
+				<!-- Featured Portfolio items -->
+				<div class="row" id="portfolio-items">
+			
+					<div class="span3 portfolioitem portfolio-type1">
+						<img src="/assets/thumb01.jpg" alt="">
+						<div class="portfolioitem-hoverinfo">
+							<h3>Lorem ipsum</h3>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+							<div class="portfolioitem-actions">
+								<a href="/assets/01.jpg" class="tips img-circle lightbox" title="Preview image" data-placement="bottom" data-fancybox-group="portfolioimages"><span class="glyphicons white zoom_in"><i></i></span></a>
+								<a href="#portfolioitem-1" class="tips more-info img-circle" title="View Project" data-placement="bottom"><span class="glyphicons white share"><i></i></span></a>
+							</div>
+						</div>
+					</div><!--/portfolioitem-->
+					
+					<div class="span3 portfolioitem portfolio-type2">
+						<img src="/assets/thumb02.jpg" alt="">
+						<div class="portfolioitem-hoverinfo">
+							<h3>Cras gravida fringilla</h3>
+							<p>Donec eros magna, blandit eu tempus a, ornare quis nulla.</p>
+							<div class="portfolioitem-actions">
+								<a href="/assets/02.jpg" class="tips img-circle lightbox" title="Preview image" data-placement="bottom" data-fancybox-group="portfolioimages"><span class="glyphicons white zoom_in"><i></i></span></a>
+								<a href="#portfolioitem-2" class="tips more-info img-circle" title="View Project" data-placement="bottom"><span class="glyphicons white share"><i></i></span></a>
+							</div>
+						</div>
+					</div><!--/portfolioitem-->
+					
+					<div class="span3 portfolioitem portfolio-type3">
+						<img src="/assets/thumb03.jpg" alt="">
+						<div class="portfolioitem-hoverinfo">
+							<h3>Nulla diam lacus</h3>
+							<p>Curabitur risus lacus, congue eget condimentum id, feugiat et nisl.</p>
+							<div class="portfolioitem-actions">
+								<a href="/assets/03.jpg" class="tips img-circle lightbox" title="Preview image" data-placement="bottom" data-fancybox-group="portfolioimages"><span class="glyphicons white zoom_in"><i></i></span></a>
+								<a href="#portfolioitem-3" class="tips more-info img-circle" title="View Project" data-placement="bottom"><span class="glyphicons white share"><i></i></span></a>
+							</div>
+						</div>
+					</div><!--/portfolioitem-->
+					
+					<div class="span3 portfolioitem portfolio-type1">
+						<img src="/assets/thumb04.jpg" alt="">
+						<div class="portfolioitem-hoverinfo">
+							<h3>Proin quam lacus</h3>
+							<p>Proin quam lacus, dapibus non sodales ac, pharetra et urna.</p>
+							<div class="portfolioitem-actions">
+								<a href="/assets/04.jpg" class="tips img-circle lightbox" title="Preview image" data-placement="bottom" data-fancybox-group="portfolioimages"><span class="glyphicons white zoom_in"><i></i></span></a>
+								<a href="#portfolioitem-4" class="tips more-info img-circle" title="View Project" data-placement="bottom"><span class="glyphicons white share"><i></i></span></a>
+							</div>
+						</div>
+					</div><!--/portfolioitem-->
+					
+					<div class="span3 portfolioitem portfolio-type2">
+						<img src="/assets/thumb05.jpg" alt="">
+						<div class="portfolioitem-hoverinfo">
+							<h3>Tellus ligula</h3>
+							<p>Cras vestibulum, mi aliquam molestie tincidunt, tellus ligula tempor neque. </p>
+							<div class="portfolioitem-actions">
+								<a href="/assets/05.jpg" class="tips img-circle lightbox" title="Preview image" data-placement="bottom" data-fancybox-group="portfolioimages"><span class="glyphicons white zoom_in"><i></i></span></a>
+								<a href="#portfolioitem-5" class="tips more-info img-circle" title="View Project" data-placement="bottom"><span class="glyphicons white share"><i></i></span></a>
+							</div>
+						</div>
+					</div><!--/portfolioitem-->
+					
+					<div class="span3 portfolioitem portfolio-type1">
+						<img src="/assets/thumb07.jpg" alt="">
+						<div class="portfolioitem-hoverinfo">
+							<h3>In sed eleifend orci</h3>
+							<p>Morbi ultrices ullamcorper magna, quis placerat libero pretium at.</p>
+							<div class="portfolioitem-actions">
+								<a href="/assets/07.jpg" class="tips img-circle lightbox" title="Preview image" data-placement="bottom" data-fancybox-group="portfolioimages"><span class="glyphicons white zoom_in"><i></i></span></a>
+								<a href="#portfolioitem-6" class="tips more-info img-circle" title="View Project" data-placement="bottom"><span class="glyphicons white share"><i></i></span></a>
+							</div>
+						</div>
+					</div><!--/portfolioitem-->
+			
+			
+			
+				</div><!--/row-->
+				<!-- /Featured Portfolio Items -->
+			
+				<div class="row" id="full-portfolio-items">
+					<div class="span9">
+			
+						<a href="#" class="btn btn-primary hidden" id="portfolio-back">&larr; Back to Portfolio List</a>
+			
+						<!-- This is a Portfolio item -->
+						<div class="portfolioitem-content hidden" id="portfolioitem-1">
+							<img src="/assets/01.jpg" alt="">
+							<h2 class="primary-color">Lorem ipsum</h2>
+							
+							<h3>Lectus tristique scelerisque</h3>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tincidunt diam ac lectus tristique scelerisque. Quisque vitae libero sit amet turpis faucibus auctor eget vitae tortor. Aenean metus erat, ultricies non mattis quis, molestie ac massa. Sed sollicitudin erat ac dui viverra a posuere eros adipiscing. Phasellus nisi lectus, imperdiet sed hendrerit ac, dictum quis sem. Phasellus vel nisi non massa elementum porta. Aliquam erat volutpat.</p>
+							
+							
+							<ul class="pager">
+								<li class="previous"><a href="#portfolioitem-6" class="">&larr; Previous</a></li>
+								<li class="next"><a href="#portfolioitem-2" class="">Next &rarr;</a></li>
+							</ul>
+						
+						</div>
+						<!-- /Portfolio item -->
+						
+						<!-- This is a Portfolio item -->
+						<div class="portfolioitem-content hidden" id="portfolioitem-2">
+							<img src="/assets/02.jpg" alt="">
+							<h2 class="primary-color">Cras gravida fringilla</h2>
+							
+							<h3>Accumsan dolor ornare</h3>
+							<p>Vivamus gravida convallis est, non tristique nisl pellentesque ut. Praesent congue tortor vel quam scelerisque in suscipit elit malesuada. Nam volutpat ultricies augue, ac accumsan dolor ornare eu. Nam ut egestas nulla. Nunc ullamcorper, nulla vitae pellentesque dictum, diam ligula iaculis ipsum, aliquam vestibulum leo libero vel turpis. Nunc cursus dignissim sodales. </p>
+							
+							
+							<ul class="pager">
+								<li class="previous"><a href="#portfolioitem-1" class="">&larr; Previous</a></li>
+								<li class="next"><a href="#portfolioitem-3" class="">Next &rarr;</a></li>
+							</ul>
+						
+						</div>
+						<!-- /Portfolio item -->
+						
+						<!-- This is a Portfolio item -->
+						<div class="portfolioitem-content hidden" id="portfolioitem-3">
+							<img src="/assets/03.jpg" alt="">
+							<h2 class="primary-color">Nulla diam lacus</h2>
+							
+							<h3>Etiam sagittis, felis id </h3>
+							<p>Etiam eleifend sem ornare lacus ullamcorper interdum. Aenean nec justo nisl, vel cursus nulla. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pellentesque, eros at vestibulum feugiat, ante urna cursus turpis, in rhoncus enim lorem ac nisl. Phasellus tristique ultricies metus, a condimentum lacus sagittis non. Phasellus euismod nulla eget lacus aliquam auctor. </p>
+							<p>Sed nisl sem, semper id sollicitudin vitae, pharetra at tellus. Ut eu sem vitae erat rhoncus posuere. Praesent hendrerit, nunc nec molestie bibendum, leo metus volutpat lacus, a luctus ante massa a lectus. Etiam sagittis, felis id dignissim pulvinar, purus lorem tempor lectus, et suscipit mauris lorem et elit. </p>
+							
+						
+							<ul class="pager">
+								<li class="previous"><a href="#portfolioitem-2" class="">&larr; Previous</a></li>
+								<li class="next"><a href="#portfolioitem-4" class="">Next &rarr;</a></li>
+							</ul>
+						
+						</div>
+						<!-- /Portfolio item -->
+						
+						<!-- This is a Portfolio item -->
+						<div class="portfolioitem-content hidden" id="portfolioitem-4">
+							<img src="/assets/04.jpg" alt="">
+							<h2 class="primary-color">Proin quam lacus</h2>
+							
+							<h3>Subtitle</h3>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tincidunt diam ac lectus tristique scelerisque. Quisque vitae libero sit amet turpis faucibus auctor eget vitae tortor. Aenean metus erat, ultricies non mattis quis, molestie ac massa. Sed sollicitudin erat ac dui viverra a posuere eros adipiscing. Phasellus nisi lectus, imperdiet sed hendrerit ac, dictum quis sem. Phasellus vel nisi non massa elementum porta. Aliquam erat volutpat.</p>
+							
+							
+							<ul class="pager">
+								<li class="previous"><a href="#portfolioitem-3" class="">&larr; Previous</a></li>
+								<li class="next"><a href="#portfolioitem-5" class="">Next &rarr;</a></li>
+							</ul>
+						
+						</div>
+						<!-- /Portfolio item -->
+						
+						<!-- This is a Portfolio item -->
+						<div class="portfolioitem-content hidden" id="portfolioitem-5">
+							<img src="/assets/05.jpg" alt="">
+							<h2 class="primary-color">Tellus ligula</h2>
+							
+							<h3>ullam pharetra, metus id semper fringilla</h3>
+							<p>Praesent suscipit pellentesque est, non blandit ante feugiat in. Aliquam erat volutpat. Donec lorem sem, vestibulum ac vehicula in, tempus sit amet sem. Curabitur nec ante risus. Integer libero nunc, euismod in mattis ac, auctor in arcu. Nullam pharetra, metus id semper fringilla, est lorem euismod lectus, at dignissim elit turpis et dolor. Praesent adipiscing, metus eget lacinia viverra, dolor nibh consequat erat, a rutrum leo nulla non metus. </p>
+							
+							
+							<ul class="pager">
+								<li class="previous"><a href="#portfolioitem-4" class="">&larr; Previous</a></li>
+								<li class="next"><a href="#portfolioitem-6" class="">Next &rarr;</a></li>
+							</ul>
+							
+						</div>
+						<!-- /Portfolio item -->
+						
+						<!-- This is a Portfolio item -->
+						<div class="portfolioitem-content hidden" id="portfolioitem-6">
+							<img src="/assets/07.jpg" alt="">
+							<h2 class="primary-color">In sed eleifend orci</h2>
+							
+							<h3>Enim mauris rhoncus elit</h3>
+							<p>Phasellus condimentum pulvinar tincidunt. Phasellus vehicula, felis id auctor placerat, nunc magna feugiat nunc, vitae tempor metus lorem ac quam. In vel lacus nibh, a varius metus.</p>
+							<p>Suspendisse ut tortor ligula, id fringilla mi. Curabitur bibendum tortor tempus sem posuere vehicula accumsan mauris molestie. Etiam eget nulla vel sem tristique dapibus. In orci justo, pharetra vel scelerisque eu, gravida vel felis. Etiam mattis blandit rutrum. Maecenas viverra massa sed sem feugiat sed mollis dolor venenatis. In aliquet, sem et cursus scelerisque, enim mauris rhoncus elit, sit amet ornare massa metus non lectus. </p>
+							
+							
+							<ul class="pager">
+								<li class="previous"><a href="#portfolioitem-5" class="">&larr; Previous</a></li>
+								<li class="next"><a href="#portfolioitem-1" class="">Next &rarr;</a></li>
+							</ul>
+							
+						</div>
+						<!-- /Portfolio item -->
+			
+				</div><!--/span9-->
+			
+			</div><!--/row-->
+			
+		</div>	
+					</div>	
+		</div><!--/section-->
+        <div id="message" class="modal hide fade in" style="display: none; ">  
+<div class="modal-header">  
+<a class="close" data-dismiss="modal">×</a>  
+<h7>Message <%= @user.name %></h7>  
+</div>  
+<div class="modal-body">  
+<%= form_for @message, :url => user_messages_path(@user) do |f| %>
+  <p>
+    To:<br />
+		<%= f.text_field :to, :value => (@user.email) %>
+		
+  </p>
+  <p>
+    Subject:<br />
+    <%= f.text_field :subject %>
+   
+    </p>
+    <p>
+      Message<br />
+      <%= f.text_area :body %>
+			
+    </p>
+    
+               
+</div>  
+<div class="modal-footer">   
+<a href="#" class="btn" data-dismiss="modal">Close</a>  
+<%= f.submit "Send", class: "btn btn-success" %>
+<% end %>   
+</div>  
+</div>    
+
+		<div class="clear"></div>
+        <!-- END OF THE MAIN CONTENT -->
+        
+     
+        
+

@@ -1,32 +1,218 @@
+<<<<<<< HEAD
+
+
+
+
+
+        <!-- MAIN CONTENT -->
+              	
+	 <!-- Sidebar placed on the LEFT of the screen -->
+        <div class="span3 sleft" id="sidebar">
+          <div class="sidebar-nav equal hidden-phone">
+            <ul class="nav nav-list affix" id="resumenav">
+                <li id="usercollapse"><a data-toggle="collapse" href="#usernav" class="glyphicons white chevron-right"><%= gravatar_for current_user, size: 20 %> <div class="sidebar-name"><%= current_user.name %><% if current_user.received_messages.where(:read_at => nil).any? %>
+<% end %></div> <i></i></a> </li>
+<ul id="usernav" class="collapse">  
+            <li class="glyphicons white share"><%= link_to "My Profile", current_user %><i></i></li>
+            <li class="glyphicons white share_alt"><%= link_to "Users", users_path %><i></i></li>
+            <li class="glyphicons white user"><%= link_to "Account", account_user_path(current_user) %><i></i></li>
+            <li class="glyphicons white pencil"><%= link_to "Edit Profile", edit_user_path(current_user) %><i></i></li>
+=======
 <% if signed_in? %>
   <div class="row">
-    <aside class="span4">
-      <section>
-        <%= render 'shared/user_info' %>
-      </section>
-      <section>
-        <%= render 'shared/stats' %>
-      </section>
-      <section>
-        <%= render 'shared/micropost_form' %>
-      </section>
-    </aside>
+   <!-- Sidebar placed on the LEFT of the screen -->
+        <div class="span3 sleft" id="sidebar">
+          <div class="sidebar-nav equal hidden-phone">
+            <ul class="nav nav-list affix" id="resumenav">
+          
+                <li id="usercollapse"><a data-toggle="collapse" href="#usernav" class="glyphicons white chevron-right"> <div class="sidebar-name"> About            
+</div> <i></i></a> </li>
+<ul id="usernav" class="collapse">  
+           <li class="glyphicons white notes_2"><%= link_to "Rules", about_path %><i></i></li>
+   
+            <li class="divider"></li>
+             <li class="glyphicons white user"><%= link_to "Users", users_path %><i></i></li>
+   
+>>>>>>> 881ee705febd4004d6343ba22e02d84535086797
+            <li class="divider"></li>
+            <li class="glyphicons white rotation_lock"><%= link_to "Sign out", signout_path, method: "delete" %><i></i></li>
+             <li class="divider"></li>
+</ul>
+<<<<<<< HEAD
+<li class="glyphicons white home"> <%= link_to "Home", root_path %><i></i></li>
+ <li class="glyphicons white envelope"><i></i><a href="<%= user_messages_path(current_user) %>"> Mail 
+    </a>        <div class="notification">
+<% if current_user.received_messages.where(:read_at => nil).any? %>
+<%= current_user.received_messages.where(:read_at => nil).count %>
+<% end %>
+</div></li>
+               <li class="glyphicons white conversation"> <%= link_to "Meetup", marketplace_path %><i></i></li>
+               <li class="glyphicons white notes_2"> <%= link_to "Job Board", jobs_path %><i></i></li>
+    
+           
+            </ul>
+            
+=======
+
+<div class="trapdoor">
+  <div class="top door">
+  </div>
+  <div class="bottom door">
+  </div>
+  <a href="https://twitter.com/justingabes" class="twitter-follow-button" data-show-count="false" data-size="large" data-dnt="false">Follow @justingabes</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="http://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+</div>
+            </ul>
+>>>>>>> 881ee705febd4004d6343ba22e02d84535086797
+          </div>
+      </div>
+   
+ 
+<<<<<<< HEAD
+      <div class="container">               
+     
+      <div class="row" id="content">
+
+        <div class="span10 equal" id="main-content">
+           <% flash.each do |key, value| %>
+        <div class="alert alert-<%= key %>"><%= value %><a class="close" data-dismiss="alert" href="#">&times;</a></div>
+      <% end %>
+       
+                          <div class="tools">
+                                         <h3>People in My Network (<%= @connect.count %>)</h3>
+<% if @connect.any? %>
+        
+                <% @connect.shuffle[0,5].each do |user| %>
+                 <div class="alert alert-info">
+                  <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <ol class="connect">
+                 <li>     <%= link_to gravatar_for(user, size: 40), user %> </li>
+      <li>          <%= link_to user.name, user %></li>
+        
+                
+                </ol>
+                </div>
+                <% end %>
+            
+            <% end %>
+           
+<a href="#" title="" >&rarr; View All</a>
+
+
+
+</div>
+              
+
+        
+        	<div class="section first-section" id="name">
+	            <div class="row author">
+	            	<div class="span3">
+	            		<%= gravatar_for @user, size: 160, class: "img-rounded" %>
+                       
+	            	</div>
+	            	<div class="span6">
+				    	<h1><%= @user.name %></h1>  <br/>
+              <h2 class="primary-color">
+              <% unless current_user?(@user) %> <%= @user.status.blank? ? "Network not listed" : @user.status %>
+         <% else %>
+  <%= link_to "College Student or Young Professional?", edit_user_path(current_user) if @user.status.blank? %>
+         <%= @user.status %>
+         
+         <% end %>
+</h2>
+ <%= render 'shared/stats' %>
+   <% unless current_user?(@user) %>   
+<div class="profile-heading">
+
+<%= render 'users/follow_form' if signed_in? %> 
+ <div class="add-button">
+  <%= render 'users/bookmark_form' if signed_in? %> 
+   <div class="add-button">
+  <div id="mail" class="tips icon-btn-mail" title="Message <%= @user.name %>" data-placement="bottom">
+  <a data-toggle="modal" href="#message" class="glyphicons white envelope"><i></i></a>  
+  </div> 
+  
+
+
+
+ </div>
+        </div> 
+        </div> 
+    <% else %>
+        <div id="myprofile" class="tips icon-btn-edit" title="My Profile" data-placement="bottom"><a href="<%= user_path(current_user) %>" class="glyphicons white share"><i></i> <span class="edit-button">My Profile</a></div>
+  <% end %>      
+				   	</div>
+				</div>
+			
+             
+<div class="homefeed">				
+<div class="span8">				
+     <ul class="nav nav-pills" id="myTab">
+  <li class="active"><a href="#follow" data-toggle="tab">Following</a></li>
+  <li><a href="#network" data-toggle="tab"><%= @user.network %></a></li>
+ 
+</ul>
+
+
+<div class="tab-content">
+  <div class="tab-pane active" id="follow"><%= render 'shared/feed' %></div>
+  <div class="tab-pane" id="network"> <%= render 'shared/networkfeed' %></div>
+ 
+
+     </div>
+    </div>
+    </div>
+    
+<div class="clear"></div>
+  
+
+		<div class="clear"></div>
+        <!-- END OF THE MAIN CONTENT -->
+        
+     
+        
+
+=======
+            
     <div class="span8">
-      <h3>Micropost Feed</h3>
+    
+     <%= render 'shared/user_info' %>
+     <%= render 'shared/micropost_form' %>
+      <h3>Recent Bets</h3>
       <%= render 'shared/feed' %>
     </div>
   </div>
 <% else %>
+ <% provide(:title, 'CampusWeaver') %>
   <div class="center hero-unit">
-    <h1>Welcome to the Sample App</h1>
-    <p>
-      This is the home page for the 
-      <a href="http://railstutorial.org/">Ruby on Rails Tutorial</a>
-      sample application.
-    </p>
+    <h1>Welcome to the Harper Classic 2013</h1>
+   
 
-    <%= link_to "Sign up now!", signup_path, class: "btn btn-large btn-primary" %>
+
+<div class="row">
+  <div class="span6" align="center">
+  <div class="form-signup">
+  <h2> Sign in here.</h2>
+ 
+ <hr>
+ 
+    <%= form_for(:session, url: sessions_path) do |f| %>
+      
+      
+      <%= f.label :email %>
+      <%= f.text_field :email, {class: "email"} %>
+
+       <%= f.label :password %>
+      <%= f.password_field :password, {:class => "login_password"} %>
+
+      
+    
+
+       <%= f.submit "Sign in", class: "btn btn-large btn-primary" %>
+    <% end %>
   </div>
-
-  <%= link_to image_tag("rails.png", alt: "Rails"), 'http://rubyonrails.org/' %>
+</div>
+</div>
+       
 <% end %>
+>>>>>>> 881ee705febd4004d6343ba22e02d84535086797

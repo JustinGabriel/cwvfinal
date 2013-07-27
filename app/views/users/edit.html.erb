@@ -1,27 +1,247 @@
-<% provide(:title, "Edit user") %> 
-<h1>Update your profile</h1>
 
-<div class="row">
-  <div class="span6 offset3">
-    <%= form_for(@user) do |f| %>
+
+<% provide(:title) %>
+
+<%= form_for(@user, {:html => {:class => "form-edit"}}) do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
 
-      <%= f.label :name %>
-      <%= f.text_field :name %>
 
-      <%= f.label :email %>
-      <%= f.text_field :email %>
+      <div class="row" id="content">
 
-      <%= f.label :password %>
-      <%= f.password_field :password %>
+        <!-- MAIN CONTENT -->
+ <!-- Sidebar placed on the LEFT of the screen -->
+        <div class="span3 sleft" id="sidebar">
+          <div class="sidebar-nav equal hidden-phone">
+            <ul class="nav nav-list affix" id="resumenav">
+          
+                <li id="usercollapse"><a data-toggle="collapse" href="#usernav" class="glyphicons white chevron-right"><%= gravatar_for current_user, size: 20 %> <div class="sidebar-name"><%= current_user.name %><% if current_user.received_messages.where(:read_at => nil).any? %>
+              <div class="usernotice"> </div>
+<% end %></div> <i></i></a> </li>
+<ul id="usernav" class="collapse">  
+            <li class="glyphicons white share"><%= link_to "My Profile", current_user %><i></i></li>
+            <li class="glyphicons white envelope"><i></i><a href="<%= user_messages_path(current_user) %>"> Mail 
+    </a>        <div class="notification">
+<% if current_user.received_messages.where(:read_at => nil).any? %>
+<%= current_user.received_messages.where(:read_at => nil).count %>
+<% end %>
+</div></li>
 
-      <%= f.label :password_confirmation, "Confirm Password" %>
-      <%= f.password_field :password_confirmation %>
+            <li class="glyphicons white share_alt"><%= link_to "Users", users_path %><i></i></li>
+            <li class="glyphicons white user"><%= link_to "Account", account_user_path(current_user) %><i></i></li>
+            <li class="glyphicons white pencil"><%= link_to "Edit Profile", edit_user_path(current_user) %><i></i></li>
+            <li class="divider"></li>
+            <li class="glyphicons white rotation_lock"><%= link_to "Sign out", signout_path, method: "delete" %><i></i></li>
+             <li class="divider"></li>
+</ul>
 
-      <%= f.submit "Save changes", class: "btn btn-large btn-primary" %>
-    <% end %>
 
-    <%= gravatar_for @user %>
-    <a href="http://gravatar.com/emails">change</a>
+
+             <li><a href="#profile-pic" class="scroller">Profle Picture</a></li>
+              <li><a href="#about-me" class="scroller">About Me</a></li>
+              <li><a href="#personal-information" class="scroller">Personal Info</a></li>
+              <li><a href="#employment" class="scroller">Employment</a></li>
+              <li><a href="#education" class="scroller">Education</a></li>
+            </ul>
+          </div>
+      </div>
+   
+ 
+                     
+     
+
+
+        <div class="span10 equal" id="main-content">
+                   <div class="tools noprint visible-desktop">
+                   
+              <h3 class="glyphicons share"><%= link_to "Go to Account Information?", account_user_path(current_user) %><i></i></h3>
+            </h3>
+             
+
+</div>
+  <div class="section first-edit" id="profile-pic">
+                  
+	            <h2 class="section-title"><span class="glyphicons camera"><i></i></span>Profile Picture<a href="#phone-navbar" class="top visible-phone"></a></h2>            
+        
+	            <div class="row author">
+	            	<div class="span3">
+	            		<%= gravatar_for @user, size: 160, class: "img-rounded" %>
+                       <a class="btn" href="http://gravatar.com/emails"><i class="icon-edit"></i></a>
+	            	</div>
+	            	
+				</div>
+
+<div class="section" id="about-me">
+	            <h2 class="section-title"><span class="glyphicons pencil"><i></i></span>About Me<a href="#phone-navbar" class="top visible-phone"></a></h2>
+				
+				<div class="well">
+   
+					<h3><%= f.text_area :headline, {:class => "headline"} %></h3>
+					<p class="lead"><%= f.text_area :about, {:class => "about"} %></p>
+				</div>
+
+      			
+				
+					<div class="section" id="follow-me">
+	            <h2 class="section-title"><span class="glyphicons pencil"><i></i></span>Follow Me<a href="#phone-navbar" class="top visible-phone"></a></h2>
+					<div>
+						<div id="facebook" class="tips icon-btn-social" title="Facebook" data-placement="bottom"><a href="#" class="glyphicons white facebook"><i></i></a> </div>
+                        <%= f.text_field :facebook, {:class => "share-facebook"} %>
+						<div id="twitter" class="tips icon-btn-social"><a href="#" class="glyphicons white twitter"><i></i></a></div><%= f.text_field :twitter, {:class => "share-twitter"} %>
+                        </br>
+						<div id="linkedin" class="tips icon-btn-social" title="Linkedin" data-placement="bottom"><a href="#" class="glyphicons white linked_in"><i></i></a></div>
+                           <%= f.text_field :linkedin, {:class => "share-linkedin"} %>
+                        <div id="pinterest" class="tips icon-btn-social" title="Pinterest" data-placement="bottom"><a href="#" class="glyphicons white pinterest"><i></i></a></div>
+                           <%= f.text_field :pinterest, {:class => "share-pinterest"} %>
+                        
+   
+					</div>
+				</div>		
+			</div>
+            </div>
+            <div class="section" id="personal-information">
+	            <h2 class="section-title"><span class="glyphicons pencil"><i></i></span>Personal Information<a href="#phone-navbar" class="top visible-phone"></a></h2>
+                 
+				<div class="infoline span9 first"><div class="row">
+	            		<div class="span2 muted">Network</div>
+	            		<div class="span7"> <%= f.text_field :network, {:class => "network"} %>  </div>
+				  	</div></div>
+				  	<span class="clear"></span>
+                    
+                    <div class="infoline span9"><div class="row">
+				  		<div class="span2 muted">Member Type</div>
+				  		<div class="span7"> <%= f.select :status, [["College Student"], ["Young Professional"], ["Graduate Student"]], {:include_blank => "Please select"}, {:class => "status"}  %> </div>
+				  	</div></div>
+				  	<span class="clear"></span>
+				
+                  <div class="infoline span9"><div class="row">
+				  		<div class="span2 muted">Industry or Major</div>
+				  		<div class="span7"> <%= f.text_field :industry, {:class => "industry"} %> </div>
+				  	</div></div>
+				  	<span class="clear"></span>
+	        		<div class="infoline span9"><div class="row">
+					  	<div class="span2 muted">Location</div>
+					  	<div class="span7">
+					  		<%= f.text_field :location, {:class => "location"} %> 
+</span> 
+
+					  	</div>
+					</div></div>
+				  	<span class="clear"></span>
+                    
+                  
+                    
+                    	<div class="infoline span9"><div class="row">
+	            		<div class="span2 muted">Date of birth</div>
+	            		<div class="span7"> <%= f.text_field :dob, {:class => "dob"} %> 
+</div>
+				  	</div></div>
+				  	<span class="clear"></span>
+				  	
+				  	
+	        		<div class="infoline span9"><div class="row">
+				  		<div class="span2 muted">Email</div>
+				  		<div class="span7"> <%= f.text_field :email, {:class => "email"} %></div>
+				  	</div></div>
+				  	<span class="clear"></span>
+
+	        		<div class="infoline span9"><div class="row">
+					  	<div class="span2 muted">Phone</div>
+					  	<div class="span7">
+					  		 <%= f.text_field :phone, {:class => "phone"} %>
+					  	</div>
+					</div></div>
+				  	<span class="clear"></span>
+                 
+				  	
+	        		<div class="infoline span9 last"><div class="row">
+					  	<div class="span2 muted">Website</div>
+					  	<div class="span7">
+                         <div class="input-prepend"><span class="add-on">http://</span><%= f.text_field :website, {:class => "website", :id => "prependedInput"} %> </div>
+					</div></div></div>
+
+	  	
+		  	</div><!--/section--> 
+		  	
+		  	<div class="section" id="employment">
+			  	<h2 class="section-title"><span class="glyphicons pencil"><i></i></span>Employment<a href="#phone-navbar" class="top visible-phone"></a></h2>
+			  	
+			  	<div class="timeline">
+			  		
+		  			 <div class="timeline-item">
+		  			 	<div class="timeline-item-date">2011 - now</div>
+		  			 	<div class="timeline-item-trigger"><span class="glyphicons white circle_plus" data-toggle="collapse" data-target="#position1"><i></i></span></div>
+		  			 	<div class="timeline-arrow"><i></i></div>
+		  			 	<div class="timeline-item-content">
+							<h3 class="timeline-item-title" data-toggle="collapse" data-target="#position1">Senior UX Designer @ Company</h3>
+							<div class="collapse in" id="position1">
+								<p><small class="muted">2011 - Present</small></p>
+								<h4 class="media-heading primary-color">Roles and Responsibilities</h4>
+								<p>Here is example text to illustrate the job description. Here is example text to illustrate the job description. Here is example text to illustrate the job description. Here is example text to illustrate the job description.</p>	
+								<p><a href="#" title="" >&rarr; View website</a></p>
+							</div>
+						</div>
+					 </div><!--/timeline-item--> 
+					 <span class="clear"></span>
+					 
+					 <div class="timeline-item">
+		  			 	<div class="timeline-item-date">2010 - 2011</div>
+		  			 	<div class="timeline-item-trigger"><span class="glyphicons white circle_plus" data-toggle="collapse" data-target="#position2"><i></i></span></div>
+		  			 	<div class="timeline-arrow"><i></i></div>
+		  			 	<div class="timeline-item-content">
+							<h3 class="timeline-item-title" data-toggle="collapse" data-target="#position2">Junior UX Designer @ Company</h3>
+							<div class="collapse" id="position2">
+								<p><small class="muted">from 2010 to 2011</small></p>
+								<h4 class="media-heading primary-color">Lorem ipsum dolor sit amet</h4>
+								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tincidunt diam ac lectus tristique scelerisque. Quisque vitae libero sit amet turpis faucibus auctor eget vitae tortor. Aenean metus erat, ultricies non mattis quis, molestie ac massa. Sed sollicitudin erat ac dui viverra a posuere eros adipiscing. Phasellus nisi lectus, imperdiet sed hendrerit ac, dictum quis sem. Phasellus vel nisi non massa elementum porta. Aliquam erat volutpat.adipiscing elit. Proin tincidunt diam ac lectus tristique scelerisque. Quisque vitae libero sit amet turpis faucibus auctor eget vitae tortor. Aenean metus erat, ultricies non mattis quis, molestie ac massa. Sed sollicitudin erat ac dui viverra a posuere eros adipiscing. Phasellus nisi lectus, imperdiet sed hendrerit ac, dictum quis sem. Phasellus vel nisi non massa elementum adipiscing elit. Proin tincidunt diam ac lectus tristique scelerisque. Quisque vitae libero sit amet turpis faucibus auctor eget vitae tortor. Aenean metus erat, ultricies non mattis quis, molestie ac massa. Sed sollicitudin erat ac dui viverra a posuere eros adipiscing. Phasellus nisi lectus, imperdiet sed hendrerit ac, dictum quis sem. Phasellus vel nisi non massa elementum </p>	
+							</div>
+						</div>
+					 </div><!--/timeline-item--> 
+					 <span class="clear"></span>
+					 
+					 <div class="timeline-item">
+		  			 	<div class="timeline-item-date">2009 - 2010</div>
+		  			 	<div class="timeline-item-trigger"><span class="glyphicons white circle_plus" data-toggle="collapse" data-target="#position3"><i></i></span></div>
+		  			 	<div class="timeline-arrow"><i></i></div>
+		  			 	<div class="timeline-item-content">
+							<h3 class="timeline-item-title" data-toggle="collapse" data-target="#position3">Webdesigner @ Studioprod</h3>
+							<div class="collapse" id="position3">
+								<p><small class="muted">from october 2009 to 2010</small></p>
+								<h4 class="media-heading primary-color">Lorem ipsum dolor sit amet</h4>
+								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tincidunt diam ac lectus tristique scelerisque. Quisque vitae libero sit amet turpis faucibus auctor eget vitae tortor. Aenean metus erat, ultricies non mattis quis, molestie ac massa. Sed sollicitudin erat ac dui viverra a posuere eros adipiscing. Phasellus nisi lectus, imperdiet sed hendrerit ac, dictum quis sem. Phasellus vel nisi non massa elementum porta. Aliquam erat volutpat.</p>	
+							</div>
+						</div>
+					 </div><!--/timeline-item--> 
+					 <span class="clear"></span>
+					 
+					 <div class="timeline-item">
+		  			 	<div class="timeline-item-date">2008 - 2009</div>
+		  			 	<div class="timeline-item-trigger"><span class="glyphicons white circle_plus" data-toggle="collapse" data-target="#position4"><i></i></span></div>
+		  			 	<div class="timeline-arrow"><i></i></div>
+		  			 	<div class="timeline-item-content">
+							<h3 class="timeline-item-title" data-toggle="collapse" data-target="#position4">Designer @ Creativecompany</h3>
+							<div class="collapse" id="position4">
+								<p><small class="muted">from 2008 to 2009</small></p>
+								<h4 class="media-heading primary-color">Lorem ipsum dolor sit amet</h4>
+								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tincidunt diam ac lectus tristique scelerisque. Quisque vitae libero sit amet turpis faucibus auctor eget vitae tortor. Aenean metus erat, ultricies non mattis quis, molestie ac massa. Sed sollicitudin erat ac dui viverra a posuere eros adipiscing. Phasellus nisi lectus, imperdiet sed hendrerit ac, dictum quis sem. Phasellus vel nisi non massa elementum porta. Aliquam erat volutpat.</p>	
+							</div>
+						</div>
+					 </div><!--/timeline-item--> 
+					 <span class="clear"></span>
+		  			 
+			  
+		  	 
+          	  	
+		  
+        <%= f.submit "Save changes", class: "btn" %>
+    <% end %> 
+
+
+		<div class="clear"></div>
+        <!-- END OF THE MAIN CONTENT -->
+        
+		  	
+	
   </div>
+  </div>      
+</div>
 </div>

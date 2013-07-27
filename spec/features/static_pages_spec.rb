@@ -39,12 +39,39 @@ describe "Static pages" do
         end
     end
     
-    describe "Help page" do
-        before { visit help_path }
+    describe "bookmarker/bookmarking counts" do
+        let(:other_user) { FactoryGirl.create(:user) }
+        before do
+            other_user.bookmark!(user)
+            visit root_path
+        end
         
-        it { should have_selector('h1', text: 'Help') }
-        it { should have_selector('title', text: full_title('Help')) }
+        it { should have_link("0 bookmarked", href: bookmarking_user_path(user)) }
+        it { should have_link("1 bookmarkers", href: bookmarkers_user_path(user)) }
     end
+end
+end
+
+    describe "Legal page" do
+        before { visit legal_path }
+        
+        it { should have_selector('h1', text: 'Legal') }
+        it { should have_selector('title', text: full_title('Legal')) }
+    end
+describe "Welcome page" do
+    before { visit welcome_path }
+    
+    it { should have_selector('h1', text: 'welcome') }
+    it { should have_selector('title', text: full_title('welcome')) }
+end
+
+    describe "Recruiters page" do
+        before { visit recruiters_path }
+        
+        it { should have_selector('h1', text: 'Recruiters') }
+        it { should have_selector('title', text: full_title('Recruiters')) }
+    end
+
     
     describe "About page" do
         before { visit about_path }
@@ -67,14 +94,18 @@ describe "Static pages" do
         page.should have_selector 'title', text: full_title('Sign in')
         click_link "About"
         page.should have_selector 'title', text: full_title('About Us')
-        click_link "Help"
-        page.should have_selector 'title', text: full_title('Help')
+        click_link "Welcome"
+        page.should have_selector 'title', text: full_title('Welcome')
+
+        click_link "Legal"
+        page.should have_selector 'title', text: full_title('Legal')
+        click_link "Recruiters"
+        page.should have_selector 'title', text: full_title('Recruiters')
         click_link "Contact"
         page.should have_selector 'title', text: full_title('Contact')
         click_link "Home"
         click_link "Sign up now!"
         page.should have_selector 'title', text: full_title('Sign up')
-        click_link "sample app"
-        page.should have_selector 'h1', text: 'Sample App'
+       
     end
 end

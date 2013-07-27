@@ -1,0 +1,6 @@
+<% if @net_items.any? %>
+<ol class="microposts">
+    <%= render partial: 'shared/net_item', collection: @net_items %>
+</ol>
+<%= will_paginate @net_items %>
+<% end %>

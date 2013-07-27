@@ -1,10 +1,75 @@
+<<<<<<< HEAD
 <% provide(:title, 'All users') %>
+
+
+
+      <div class="row" id="content">
+
+        <!-- MAIN CONTENT -->
+              	
+	 <!-- Sidebar placed on the LEFT of the screen -->
+        <div class="span3 sleft" id="sidebar">
+          <div class="sidebar-nav equal hidden-phone">
+            <ul class="nav nav-list affix" id="resumenav">
+                <li id="usercollapse"><a data-toggle="collapse" href="#usernav" class="glyphicons white chevron-right"><%= gravatar_for current_user, size: 20 %> <div class="sidebar-name"><%= current_user.name %><% if current_user.received_messages.where(:read_at => nil).any? %>
+              <div class="usernotice"> </div>
+<% end %></div> <i></i></a> </li>
+<ul id="usernav" class="collapse">  
+            <li class="glyphicons white share"><%= link_to "My Profile", current_user %><i></i></li>
+            <li class="glyphicons white envelope"><i></i><a href="<%= user_messages_path(current_user) %>"> Mail 
+    </a>        <div class="notification">
+<% if current_user.received_messages.where(:read_at => nil).any? %>
+<%= current_user.received_messages.where(:read_at => nil).count %>
+<% end %>
+</div></li>
+
+            <li class="glyphicons white share_alt"><%= link_to "Users", users_path %><i></i></li>
+            <li class="glyphicons white user"><%= link_to "Account", account_user_path(current_user) %><i></i></li>
+            <li class="glyphicons white pencil"><%= link_to "Edit Profile", edit_user_path(current_user) %><i></i></li>
+            <li class="divider"></li>
+            <li class="glyphicons white rotation_lock"><%= link_to "Sign out", signout_path, method: "delete" %><i></i></li>
+             <li class="divider"></li>
+</ul>
+<li class="glyphicons white home"> <%= link_to "Home", root_path %><i></i></li>
+               <li class="glyphicons white conversation"> <%= link_to "Marketplace", marketplace_path %><i></i></li>
+               <li class="glyphicons white notes_2"> <%= link_to "Job Board", jobs_path %><i></i></li>
+
+           
+            </ul>
+          </div>
+      </div>
+   
+ 
+                     
+     
+
+
+        <div class="span10 equal" id="main-content">
+          <h2>All users</h2>
+=======
+<% provide(:title, 'All Users') %>
+<div id="back" class="tips icon-btn-edit" title="back" data-placement="bottom"><a href="/home" class="glyphicons white unshare"><i></i> <span class="edit-button">Back</a></div>
 <h1>All users</h1>
+>>>>>>> 881ee705febd4004d6343ba22e02d84535086797
 
 <%= will_paginate %>
 
-<ul class="users">
-  <%= render @users %>
+<ul class="microposts">
+<li>
+<%= render 'shared/users' %>
+
+</li>
 </ul>
 
 <%= will_paginate %>
+
+
+
+
+
+		<div class="clear"></div>
+        <!-- END OF THE MAIN CONTENT -->
+        
+     
+        
+

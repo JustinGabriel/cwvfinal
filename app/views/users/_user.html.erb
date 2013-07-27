@@ -1,8 +1,58 @@
-<li>
-  <%= gravatar_for user, size: 52 %>
-  <%= link_to user.name, user %>
-  <% if current_user.admin? && !current_user?(user) %>
+   
+  <aside class="span4">
+   <div class="well well-large">
+    <section>
+     <h4 align="center">
+       <%= link_to user.name, user %> 
+      </h4>
+      <div class="user-avatar" align="center">
+      <div class="user-gravatar">
+ <%= gravatar_for user, size: 160 %>
+       </div></div>
+    </section>
+    <section>
+           <% if user.status.blank? %>
+           <div class="glyphicons user"><h7>No status listed</h7><i></i><div>     
+             <% else %>
+<div class="glyphicons user"><h7><%= user.status %></h7><i></i><div>
+
+        
+         
+         <% end %>
+
+    </section>
+    <section>
+           <% if user.network.blank? %>
+           <div class="glyphicons share_alt"><h7>No network listed</h7><i></i><div>     
+             <% else %>
+<div class="glyphicons share_alt"><h7><%= user.network %></h7><i></i><div>
+
+        
+         
+         <% end %>
+
+    </section>
+
+         <section>
+      <% if user.location.blank? %>
+         <div class="glyphicons google_maps"><h7>No location listed</h7><i></i></div>
+<% else %>
+        <div class="glyphicons google_maps"><h7><%= user.location %></h7><i></i><div>
+         <% end %>
+               </section>
+               <% if current_user.admin? && !current_user?(user) %>
     | <%= link_to "delete", user, method: :delete,
                                   data: { confirm: "You sure?" } %>
+    
   <% end %>
-</li>
+
+  
+  </div>
+ 
+  </aside>
+
+	
+        
+     
+        
+

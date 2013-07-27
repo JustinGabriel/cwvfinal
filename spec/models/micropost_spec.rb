@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe Micropost do
+<<<<<<< HEAD
     
     let(:user) { FactoryGirl.create(:user) }
     
@@ -36,7 +37,11 @@ describe Micropost do
     end
     
     describe "with content that is too long" do
-        before { @micropost.content = "a" * 141 }
+        before { @micropost.content = "a" * 1000 }
         it { should_not be_valid }
     end
 end
+=======
+  pending "add some examples to (or delete) #{__FILE__}"
+end
+>>>>>>> 881ee705febd4004d6343ba22e02d84535086797

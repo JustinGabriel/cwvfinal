@@ -1,24 +1,61 @@
-<% provide(:title, 'Sign up') %>
-<h1>Sign up</h1>
+<% provide(:title, 'CampusWeaver') %>
+<h3>I am Senior UX designer</h3>
+
+     
 
 <div class="row">
-  <div class="span6 offset3">
+  <div class="span6 offset3" align="center">
+            <div class="btn-group">
+  <a class="btn btn-success" href="#"><i class="icon-lock icon-white"></i> Sign In</a>
+  <a class="btn btn-success dropdown-toggle" data-toggle="dropdown" href="#"><b class="caret white-caret"></b></a>
+              <ul class="dropdown-menu">
+              <li align="center"> <script type="in/Login">
+Hello, <?js= firstName ?> <?js= lastName ?>.
+</script></li>
+<li class="divider"></li>
+            <li>  <%= form_for(:session, url: sessions_path, class: "signin") do |f| %>
+
+     
+    <li>  <%= f.text_field :email, {:class => "email"} %> </li>
+
+      
+   <li>   <%= f.password_field :password, {:class => "login_password"} %></li>
+
+   <p align="center">   <%= f.submit "Sign in", class: "btn" %> </p>
+    <% end %></li>
+        
+          <li class="divider"></li>
+          <li align="center">Forgot Password?</li>
+            
+        </ul>
+</div>
+  <div class="form-signup">
+  
+  <h2>New member? Sign up here.</h2>
+  <p class="signup-intro"> Easily sign in and connect through your existing professional network. </p>  
+  <div class="linkedin">
+  <script type="in/Login">
+Hello, <?js= firstName ?> <?js= lastName ?>.
+</script></div>            
+<hr>
+<p class="signup-intro"> Or begin managing your career with us!</p> 
     <%= form_for(@user) do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
       
-      <%= f.label :name %>
-      <%= f.text_field :name %>
+     
+      <%= f.text_field :name, {class: "name"} %>
 
-      <%= f.label :email %>
-      <%= f.text_field :email %>
+     
+      <%= f.text_field :email, {:class => "email"} %>
 
-      <%= f.label :password %>
-      <%= f.password_field :password %>
+      
+      <%= f.password_field :password, {:class => "login_password"} %>
 
-      <%= f.label :password_confirmation, "Confirmation" %>
-      <%= f.password_field :password_confirmation %>
+      
+      <%= f.password_field :password_confirmation, {:class => "login_confirm"} %>
 
-      <%= f.submit "Create my account", class: "btn btn-large btn-primary" %>
+      <%= f.submit "Sign Up", class: "btn btn-block btn-large btn-success" %>
     <% end %>
   </div>
+</div>
 </div>

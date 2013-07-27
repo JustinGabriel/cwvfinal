@@ -1,25 +1,749 @@
+
 <% provide(:title, @user.name) %>
-<div class="row">
-  <aside class="span4">
-    <section>
-      <h1>
-        <%= gravatar_for @user %>
-        <%= @user.name %>
-      </h1>
-    </section>
-    <section>
-      <%= render 'shared/stats' %>
-    </section>
-  </aside>
-  <div class="span8">
-    <%= render 'follow_form' if signed_in? %>
-    <% if @user.microposts.any? %>
-      <h3>Microposts (<%= @user.microposts.count %>)</h3>
+
+<% if signed_in? %> 
+<!-- Sidebar placed on the LEFT of the screen -->
+        <div class="span3 sleft" id="sidebar">
+          <div class="sidebar-nav equal hidden-phone">
+            <ul class="nav nav-list affix" id="resumenav">
+                <li id="usercollapse"><a data-toggle="collapse" href="#usernav" class="glyphicons white chevron-right"><%= gravatar_for current_user, size: 20 %> <div class="sidebar-name"><%= current_user.name %><% if current_user.received_messages.where(:read_at => nil).any? %>
+              <div class="usernotice"> </div>
+<% end %></div> <i></i></a> </li>
+<ul id="usernav" class="collapse">  
+            <li class="glyphicons white share"><%= link_to "My Profile", current_user %><i></i></li>
+            <li class="glyphicons white share_alt"><%= link_to "Users", users_path %><i></i></li>
+            <li class="glyphicons white user"><%= link_to "Account", account_user_path(current_user) %><i></i></li>
+            <li class="glyphicons white pencil"><%= link_to "Edit Profile", edit_user_path(current_user) %><i></i></li>
+            <li class="divider"></li>
+            <li class="glyphicons white rotation_lock"><%= link_to "Sign out", signout_path, method: "delete" %><i></i></li>
+             <li class="divider"></li>
+</ul>
+<li class="glyphicons white home"> <%= link_to "Home", root_path %><i></i></li>
+  <li class="glyphicons white envelope"><i></i><a href="<%= user_messages_path(current_user) %>"> Mail 
+    </a>        <div class="notification">
+<% if current_user.received_messages.where(:read_at => nil).any? %>
+<%= current_user.received_messages.where(:read_at => nil).count %>
+<% end %>
+</div></li>
+
+               <li class="glyphicons white conversation"> <%= link_to "Meetup", marketplace_path %><i></i></li>
+               <li class="glyphicons white notes_2"> <%= link_to "Job Board", jobs_path %><i></i></li>
+
+
+<div class="sidebar-title"></div>
+<ul class="nav nav-list affix" id="pagenav">
+                <li><a href="#"><%= @user.name %></a></li>
+              <li><a href="#about-me" class="scroller">About Me</a></li>
+               <% if @similar.any? %>
+  <li><a href="#similar-profiles" class="scroller">Similar Profiles</a></li>
+  <% end %>
+              <li><a href="#personal-information" class="scroller">Personal Info</a></li>
+              <li><a href="#employment" class="scroller">Employment</a></li>
+              <li><a href="#education" class="scroller">Education</a></li>
+              <li><a href="#posts" class="scroller">Recent Posts</a></li>
+             
+
+
+            </ul>
+           
+            </ul>
+          </div>
+      </div>
+   
+ 
+                     
+     
+
+<div class="container">
+      <div class="row" id="content">
+
+        <!-- MAIN CONTENT -->
+              	
+	 
+        <div class="span10 equal" id="main-content">
+           <% flash.each do |key, value| %>
+        <div class="alert alert-<%= key %>"><%= value %><a class="close" data-dismiss="alert" href="#">&times;</a></div>
+      <% end %>
+       
+                          <div class="tools noprint visible-desktop">
+               
+
+<div class="fb-like" data-send="false" data-layout="box_count" data-width="450" data-show-faces="false"></div>
+               <a href="https://twitter.com/share" class="twitter-share-button" data-text="My Professional Profile" data-via="campusweaver" data-count="vertical">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+<script src="//platform.linkedin.com/in.js" type="text/javascript">
+ lang: en_US</script><script type="IN/Share" data-counter="top"></script>
+           
+</div>
+              
+
+        
+        	<div class="section first-section" id="name">
+	            <div class="row author">
+	            	<div class="span3">
+	            		<%= gravatar_for @user, size: 160, class: "img-rounded" %>
+                       
+	            	</div>
+	            	<div class="span6">
+				    	<h1><%= @user.name %></h1>  <br/>
+              <h2 class="primary-color">
+              <% unless current_user?(@user) %> <%= @user.status.blank? ? "" : @user.status %>
+         <% else %>
+  <%= link_to "College Student or Young Professional?", edit_user_path(current_user) if @user.status.blank? %>
+         <%= @user.status %>
+         
+         <% end %>
+</h2>
+ <%= render 'shared/stats' %>
+   <% unless current_user?(@user) %>   
+<div class="profile-heading">
+
+<%= render 'users/follow_form' if signed_in? %> 
+ <div class="add-button">
+  <%= render 'users/bookmark_form' if signed_in? %> 
+   <div class="add-button">
+  <div id="mail" class="tips icon-btn-mail" title="Message <%= @user.name %>" data-placement="bottom">
+  <a data-toggle="modal" href="#message" class="glyphicons white envelope"><i></i></a>  
+  </div> 
+  
+
+
+
+ </div>
+        </div> 
+        </div> 
+    <% else %>
+        <div id="edit" class="tips icon-btn-edit" title="Edit" data-placement="bottom"><a href="<%= edit_user_path(current_user) %>" class="glyphicons white pencil"><i></i> <span class="edit-button">Edit Profile</a></div>
+  <% end %>      
+				   	</div>
+				</div>
+			
+						
+                <div class="well" id="about-me">
+   
+					<h3>I am Senior UX designer</h3>
+					<p class="lead"><% unless current_user?(@user) %> <%= @user.about.blank? ? "No Summary" : @user.about %>
+         <% else %>
+         <%= link_to "Add a summary", edit_user_path(current_user) if @user.about.blank? %>
+         <%= @user.about %>
+         <% end %>
+         https://stream.twitter.com/1.1/statuses/filter.json
+
+</p>
+					<div class="social-media noprint">
+					<h7>Follow me</h7>
+					<div>
+						<div id="facebook" class="tips icon-btn" title="Facebook" data-placement="bottom"><a href="<%= @user.facebook %>" target="_blank" class="glyphicons white facebook"><i></i></a></div>
+						<div id="twitter" class="tips icon-btn" title="Twitter" data-placement="bottom"><a href="<%= @user.twitter %>" target="_blank" class="glyphicons white twitter"><i></i></a></div>
+						<div id="linkedin" class="tips icon-btn" title="Linkedin" data-placement="bottom"><a href="<%= @user.linkedin %>" target="_blank" class="glyphicons white linked_in"><i></i></a></div>
+                        <div id="pinterest" class="tips icon-btn" title="Pinterest" data-placement="bottom"><a href="<%= @user.pinterest %>" target="_blank" class="glyphicons white pinterest"><i></i></a></div>
+                        
+                                  
+					</div>
+				</div>		
+			</div>
+				</div>
+
+			
+            		     <div class="section" id="similar-profiles">
+                   <% if @similar.any? %>
+      <h2 class="section-title"><span class="glyphicons user"><i></i></span>Similar Profiles<a href="#phone-navbar" class="top visible-phone"></a></h2>
+  <% @similar.shuffle[0,3].each do |user| %>
+                 <div>
+                <ol class="similarlist">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                      <li>    <%= link_to gravatar_for(user, size: 40), user %>       <%= link_to user.name, user %>  </br><%= user.status %>     </li>
+                
+                </ol>
+                </div> 
+                        </ul>  
+                    
+
+                
+               
+                <% end %>
+            
+            <% end %>
+
+</div>
+
+                       <div class="section" id="personal-information">
+	            <h2 class="section-title"><span class="glyphicons user"><i></i></span>Personal Information<a href="#phone-navbar" class="top visible-phone"></a></h2> 
+                <h6>
+				<div class="infoline span9 first"><div class="row">
+	            		<div class="span2 muted">Network</div>
+	            		<div class="span7"><% unless current_user?(@user) %> <%= @user.network.blank? ? "No listed network" : @user.network%>
+         <% else %>
+         <%= link_to "Join a network", edit_user_path(current_user) if @user.network.blank? %>
+         <%= @user.network %>
+         <% end %></div>
+				  	</div></div>
+				  	<span class="clear"></span>
+				
+                  <div class="infoline span9"><div class="row">
+				  		<div class="span2 muted">Industry or Major</div>
+				  		<div class="span7"><% unless current_user?(@user) %> <%= @user.industry.blank? ? "No industry selected" : @user.industry %>
+         <% else %>
+         <%= link_to "What is your industry or major?", edit_user_path(current_user) if @user.industry.blank? %>
+         <%= @user.industry %>
+         <% end %></div>
+				  	</div></div>
+				  	<span class="clear"></span>
+	        		<div class="infoline span9"><div class="row">
+					  	<div class="span2 muted">Location</div>
+					  	<div class="span7">
+					  		 <% unless current_user?(@user) %> <%= @user.location.blank? ? "No location listed" : @user.location%>
+         <% else %>
+         <%= link_to "Where are you?", edit_user_path(current_user) if @user.location.blank? %>
+         <%= @user.location %>
+         <% end %>
+
+</span> 
+
+					  	</div>
+					</div></div>
+				  	<span class="clear"></span>
+                    
+                  
+                    
+                    	<div class="infoline span9"><div class="row">
+	            		<div class="span2 muted">Date of birth</div>
+	            		<div class="span7"><% unless current_user?(@user) %> <%= @user.dob.blank? ? "Private" : @user.dob %>
+         <% else %>
+         <%= link_to "Add your birthday", edit_user_path(current_user) if @user.dob.blank? %>
+         <%= @user.dob %>
+         <% end %>
+</div>
+				  	</div></div>
+				  	<span class="clear"></span>
+				  	
+				  	
+	        		<div class="infoline span9"><div class="row">
+				  		<div class="span2 muted">Email</div>
+				  		<div class="span7"><%= @user.email %></div>
+				  	</div></div>
+				  	<span class="clear"></span>
+				  	
+	        		<div class="infoline span9"><div class="row">
+					  	<div class="span2 muted">Phone</div>
+					  	<div class="span7">
+					  	<% unless current_user?(@user) %> <%= @user.phone.blank? ? "Private" : @user.phone %>
+         <% else %>
+         <%= link_to "Add a phone number", edit_user_path(current_user) if @user.phone.blank? %>
+         <%= @user.phone %>
+         <% end %>
+         
+					  	</div>
+					</div></div>
+				  	<span class="clear"></span>
+                  
+				  	
+	        		<div class="infoline span9 last"><div class="row">
+					  	<div class="span2 muted">Website</div>
+					  	<div class="span7"><a href="http://<%= @user.website %>" target="_blank" title=""><% unless current_user?(@user) %> <%= @user.website.blank? ? "No website listed" : @user.website %>
+         <% else %>
+         <%= link_to "Add a website", edit_user_path(current_user) if @user.website.blank? %>
+         <%= @user.website %>
+         <% end %>
+         </a></div>
+					</div></div>
+
+			  
+			  	
+		  	</div><!--/section--> </h6>
+		  	
+		  	<div class="section" id="employment">
+			  	<h2 class="section-title"><span class="glyphicons share_alt"><i></i></span>Employment<a href="#phone-navbar" class="top visible-phone"></a></h2>
+			  	
+			  	<div class="timeline">
+			  		
+		  			 <div class="timeline-item">
+		  			 	<div class="timeline-item-date">2011 - now</div>
+		  			 	<div class="timeline-item-trigger"><span class="glyphicons white circle_plus" ><i></i></span></div>
+		  			 	<div class="timeline-arrow"><i></i></div>
+		  			 	<div class="timeline-item-content">
+							<h3 class="timeline-item-title" >Senior UX Designer @ Company</h3>
+							<div class="collapse in" id="position1">
+								<p><small class="muted">2011 - Present</small></p>
+								<h4 class="media-heading primary-color">Roles and Responsibilities</h4>
+								<p>Here is example text to illustrate the job description. Here is example text to illustrate the job description. Here is example text to illustrate the job description. Here is example text to illustrate the job description.</p>	
+								<p><a href="#" title="" >&rarr; View website</a></p>
+							</div>
+						</div>
+					 </div><!--/timeline-item--> 
+					 <span class="clear"></span>
+					 
+					 <div class="timeline-item">
+		  			 	<div class="timeline-item-date">2010 - 2011</div>
+		  			 	<div class="timeline-item-trigger"><span class="glyphicons white circle_plus"><i></i></span></div>
+		  			 	<div class="timeline-arrow"><i></i></div>
+		  			 	<div class="timeline-item-content">
+							<h3 class="timeline-item-title">Junior UX Designer @ Company</h3>
+							<div>
+								<p><small class="muted">from 2010 to 2011</small></p>
+								<h4 class="media-heading primary-color">Lorem ipsum dolor sit amet</h4>
+								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tincidunt diam ac lectus tristique scelerisque. Quisque vitae libero sit amet turpis faucibus auctor eget vitae tortor. Aenean metus erat, ultricies non mattis quis, molestie ac massa. Sed sollicitudin erat ac dui viverra a posuere eros adipiscing. Phasellus nisi lectus, imperdiet sed hendrerit ac, dictum quis sem. Phasellus vel nisi non massa elementum porta. Aliquam erat volutpat.adipiscing elit. Proin tincidunt diam ac lectus tristique scelerisque. Quisque vitae libero sit amet turpis faucibus auctor eget vitae tortor. Aenean metus erat, ultricies non mattis quis, molestie ac massa. Sed sollicitudin erat ac dui viverra a posuere eros adipiscing. Phasellus nisi lectus, imperdiet sed hendrerit ac, dictum quis sem. Phasellus vel nisi non massa elementum adipiscing elit. Proin tincidunt diam ac lectus tristique scelerisque. Quisque vitae libero sit amet turpis faucibus auctor eget vitae tortor. Aenean metus erat, ultricies non mattis quis, molestie ac massa. Sed sollicitudin erat ac dui viverra a posuere eros adipiscing. Phasellus nisi lectus, imperdiet sed hendrerit ac, dictum quis sem. Phasellus vel nisi non massa elementum </p>	
+							</div>
+						</div>
+					 </div><!--/timeline-item--> 
+					 <span class="clear"></span>
+					 
+					 <div class="timeline-item">
+		  			 	<div class="timeline-item-date">2009 - 2010</div>
+		  			 	<div class="timeline-item-trigger"><span class="glyphicons white circle_plus" data-toggle="collapse" data-target="#position3"><i></i></span></div>
+		  			 	<div class="timeline-arrow"><i></i></div>
+		  			 	<div class="timeline-item-content">
+							<h3 class="timeline-item-title" data-toggle="collapse" data-target="#position3">Webdesigner @ Studioprod</h3>
+							<div class="collapse" id="position3">
+								<p><small class="muted">from october 2009 to 2010</small></p>
+								<h4 class="media-heading primary-color">Lorem ipsum dolor sit amet</h4>
+								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tincidunt diam ac lectus tristique scelerisque. Quisque vitae libero sit amet turpis faucibus auctor eget vitae tortor. Aenean metus erat, ultricies non mattis quis, molestie ac massa. Sed sollicitudin erat ac dui viverra a posuere eros adipiscing. Phasellus nisi lectus, imperdiet sed hendrerit ac, dictum quis sem. Phasellus vel nisi non massa elementum porta. Aliquam erat volutpat.</p>	
+							</div>
+						</div>
+					 </div><!--/timeline-item--> 
+					 <span class="clear"></span>
+					 
+					 <div class="timeline-item">
+		  			 	<div class="timeline-item-date">2008 - 2009</div>
+		  			 	<div class="timeline-item-trigger"><span class="glyphicons white circle_plus" data-toggle="collapse" data-target="#position4"><i></i></span></div>
+		  			 	<div class="timeline-arrow"><i></i></div>
+		  			 	<div class="timeline-item-content">
+							<h3 class="timeline-item-title" data-toggle="collapse" data-target="#position4">Designer @ Creativecompany</h3>
+							<div class="collapse" id="position4">
+								<p><small class="muted">from 2008 to 2009</small></p>
+								<h4 class="media-heading primary-color">Lorem ipsum dolor sit amet</h4>
+								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tincidunt diam ac lectus tristique scelerisque. Quisque vitae libero sit amet turpis faucibus auctor eget vitae tortor. Aenean metus erat, ultricies non mattis quis, molestie ac massa. Sed sollicitudin erat ac dui viverra a posuere eros adipiscing. Phasellus nisi lectus, imperdiet sed hendrerit ac, dictum quis sem. Phasellus vel nisi non massa elementum porta. Aliquam erat volutpat.</p>	
+							</div>
+						</div>
+					 </div><!--/timeline-item--> 
+					 <span class="clear"></span>
+		  			 
+			  	</div><!--/timeline --> 
+			</div><!--/section-->
+		  	
+		  	
+		  	<div class="section" id="education">
+			  	<h2 class="section-title"><span class="glyphicons certificate"><i></i></span>Education</span></a></h2>
+			  		  	<% if @user.schools.any? %>
+      <ol class="schools">
+        <%= render @schools %>
+      </ol>
+      <%= will_paginate @schools %>
+    <% end %> 
+			  		  	
+		  	</div><!--/section-->
+		  
+		  	
+		 
+			
+			<div class="section" id="posts">
+		  		<h2 class="section-title"><span class="glyphicons notes"><i></i></span>Recent Posts (<%= @user.microposts.count %>)</a></h2>
+			  	
+			  	<div class="row">
+			  		<div class="span9">
+			  			 <% if @user.microposts.any? %>
       <ol class="microposts">
         <%= render @microposts %>
       </ol>
-
-      <%= will_paginate @microposts %>
+<%= will_paginate @microposts %>
+     <% else %> 
     <% end %>
-  </div>
+
+			  		</div>
+			  	</div>
+			  	
+		  	</div><!--/section-->
+			
+			
+						
+				</div><!--/span9-->
+			
+			</div><!--/row-->
+			
+		</div>	
+					</div>	
+		</div><!--/section-->
+        <div id="message" class="modal hide fade in" style="display: none; ">  
+<div class="modal-header">  
+<a class="close" data-dismiss="modal">×</a>  
+<h4>Message <%= @user.name %></h4>
+</div>  
+<div class="modal-body">  
+<%= form_for @message, :url => user_messages_path(@user) do |f| %>
+  <p>
+    To:<br /><%= f.text_field :to, :placeholder => (@user.name) %>
+		<%= f.hidden_field :to, :value => (@user.email) %>
+		
+  </p>
+  <p>
+    Subject:<br />
+    <%= f.text_field :subject %>
+   
+    </p>
+    <p>
+      Message<br />
+      <%= f.text_area :body %>
+			
+    </p>
+    
+               
+</div>  
+<div class="modal-footer">   
+<a href="#" class="btn" data-dismiss="modal">Close</a>  
+<%= f.submit "Send", class: "btn btn-success" %>
+<% end %>   
+</div>  
+</div>    
+   
+
+
+		<div class="clear"></div>
+        <!-- END OF THE MAIN CONTENT -->
+        
+     
+        <% else %>
+        
+        <div class="span10 equal" id="main-content">
+           <% flash.each do |key, value| %>
+        <div class="alert alert-<%= key %>"><%= value %><a class="close" data-dismiss="alert" href="#">&times;</a></div>
+      <% end %>
+       
+                          <div class="tools noprint visible-desktop">
+               
+
+<div class="fb-like" data-send="false" data-layout="box_count" data-width="450" data-show-faces="false"></div>
+               <a href="https://twitter.com/share" class="twitter-share-button" data-text="My Professional Profile" data-via="campusweaver" data-count="vertical">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+<script src="//platform.linkedin.com/in.js" type="text/javascript">
+ lang: en_US</script><script type="IN/Share" data-counter="top"></script>
+           
 </div>
+              
+
+        
+        	<div class="section first-section" id="name">
+	            <div class="row author">
+	            	<div class="span3">
+	            		<%= gravatar_for @user, size: 160, class: "img-rounded" %>
+                       
+	            	</div>
+	            	<div class="span6">
+				    	<h1><%= @user.name %></h1>  <br/>
+              <h2 class="primary-color">
+              <% unless current_user?(@user) %> <%= @user.status.blank? ? "" : @user.status %>
+         <% else %>
+  <%= link_to "College Student or Young Professional?", edit_user_path(current_user) if @user.status.blank? %>
+         <%= @user.status %>
+         
+         <% end %>
+</h2>
+ <%= render 'shared/stats' %>
+   <% unless current_user?(@user) %>   
+<div class="profile-heading">
+
+<%= render 'users/follow_form' if signed_in? %> 
+ <div class="add-button">
+  <%= render 'users/bookmark_form' if signed_in? %> 
+   <div class="add-button">
+  <div id="mail" class="tips icon-btn-mail" title="Message <%= @user.name %>" data-placement="bottom">
+  <a data-toggle="modal" href="#message" class="glyphicons white envelope"><i></i></a>  
+  </div> 
+  
+
+
+
+ </div>
+        </div> 
+        </div> 
+    <% else %>
+        <div id="edit" class="tips icon-btn-edit" title="Edit" data-placement="bottom"><a href="<%= edit_user_path(current_user) %>" class="glyphicons white pencil"><i></i> <span class="edit-button">Edit Profile</a></div>
+  <% end %>      
+				   	</div>
+				</div>
+			
+						
+                <div class="well" id="about-me">
+   
+					<h3>I am Senior UX designer</h3>
+					<p class="lead"><% unless current_user?(@user) %> <%= @user.about.blank? ? "No Summary" : @user.about %>
+         <% else %>
+         <%= link_to "Add a summary", edit_user_path(current_user) if @user.about.blank? %>
+         <%= @user.about %>
+         <% end %>
+
+</p>
+					<div class="social-media noprint">
+					<h7>Follow me</h7>
+					<div>
+						<div id="facebook" class="tips icon-btn" title="Facebook" data-placement="bottom"><a href="<%= @user.facebook %>" target="_blank" class="glyphicons white facebook"><i></i></a></div>
+						<div id="twitter" class="tips icon-btn" title="Twitter" data-placement="bottom"><a href="<%= @user.twitter %>" target="_blank" class="glyphicons white twitter"><i></i></a></div>
+						<div id="linkedin" class="tips icon-btn" title="Linkedin" data-placement="bottom"><a href="<%= @user.linkedin %>" target="_blank" class="glyphicons white linked_in"><i></i></a></div>
+                        <div id="pinterest" class="tips icon-btn" title="Pinterest" data-placement="bottom"><a href="<%= @user.pinterest %>" target="_blank" class="glyphicons white pinterest"><i></i></a></div>
+                        
+                                  
+					</div>
+				</div>		
+			</div>
+				</div>
+
+			
+            		     <div class="section" id="similar-profiles">
+                   <% if @similar.any? %>
+      <h2 class="section-title"><span class="glyphicons user"><i></i></span>Similar Profiles<a href="#phone-navbar" class="top visible-phone"></a></h2>
+  <% @similar.shuffle[0,3].each do |user| %>
+                 <div>
+                <ol class="similarlist">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                      <li>    <%= link_to gravatar_for(user, size: 40), user %>       <%= link_to user.name, user %>  </br><%= user.status %>     </li>
+                
+                </ol>
+                </div> 
+                        </ul>  
+                    
+
+                
+               
+                <% end %>
+            
+            <% end %>
+
+</div>
+
+                       <div class="section" id="personal-information">
+	            <h2 class="section-title"><span class="glyphicons user"><i></i></span>Personal Information<a href="#phone-navbar" class="top visible-phone"></a></h2> 
+                <h6>
+				<div class="infoline span9 first"><div class="row">
+	            		<div class="span2 muted">Network</div>
+	            		<div class="span7"><% unless current_user?(@user) %> <%= @user.network.blank? ? "No listed network" : @user.network%>
+         <% else %>
+         <%= link_to "Join a network", edit_user_path(current_user) if @user.network.blank? %>
+         <%= @user.network %>
+         <% end %></div>
+				  	</div></div>
+				  	<span class="clear"></span>
+				
+                  <div class="infoline span9"><div class="row">
+				  		<div class="span2 muted">Industry or Major</div>
+				  		<div class="span7"><% unless current_user?(@user) %> <%= @user.industry.blank? ? "No industry selected" : @user.industry %>
+         <% else %>
+         <%= link_to "What is your industry or major?", edit_user_path(current_user) if @user.industry.blank? %>
+         <%= @user.industry %>
+         <% end %></div>
+				  	</div></div>
+				  	<span class="clear"></span>
+	        		<div class="infoline span9"><div class="row">
+					  	<div class="span2 muted">Location</div>
+					  	<div class="span7">
+					  		 <% unless current_user?(@user) %> <%= @user.location.blank? ? "No location listed" : @user.location%>
+         <% else %>
+         <%= link_to "Where are you?", edit_user_path(current_user) if @user.location.blank? %>
+         <%= @user.location %>
+         <% end %>
+
+</span> 
+
+					  	</div>
+					</div></div>
+				  	<span class="clear"></span>
+                    
+                  
+                    
+                    	<div class="infoline span9"><div class="row">
+	            		<div class="span2 muted">Date of birth</div>
+	            		<div class="span7"><% unless current_user?(@user) %> <%= @user.dob.blank? ? "Private" : @user.dob %>
+         <% else %>
+         <%= link_to "Add your birthday", edit_user_path(current_user) if @user.dob.blank? %>
+         <%= @user.dob %>
+         <% end %>
+</div>
+				  	</div></div>
+				  	<span class="clear"></span>
+				  	
+				  	
+	        		<div class="infoline span9"><div class="row">
+				  		<div class="span2 muted">Email</div>
+				  		<div class="span7"><%= @user.email %></div>
+				  	</div></div>
+				  	<span class="clear"></span>
+				  	
+	        		<div class="infoline span9"><div class="row">
+					  	<div class="span2 muted">Phone</div>
+					  	<div class="span7">
+					  	<% unless current_user?(@user) %> <%= @user.phone.blank? ? "Private" : @user.phone %>
+         <% else %>
+         <%= link_to "Add a phone number", edit_user_path(current_user) if @user.phone.blank? %>
+         <%= @user.phone %>
+         <% end %>
+         
+					  	</div>
+					</div></div>
+				  	<span class="clear"></span>
+                  
+				  	
+	        		<div class="infoline span9 last"><div class="row">
+					  	<div class="span2 muted">Website</div>
+					  	<div class="span7"><a href="http://<%= @user.website %>" target="_blank" title=""><% unless current_user?(@user) %> <%= @user.website.blank? ? "No website listed" : @user.website %>
+         <% else %>
+         <%= link_to "Add a website", edit_user_path(current_user) if @user.website.blank? %>
+         <%= @user.website %>
+         <% end %>
+         </a></div>
+					</div></div>
+
+			  
+			  	
+		  	</div><!--/section--> </h6>
+		  	
+		  	<div class="section" id="employment">
+			  	<h2 class="section-title"><span class="glyphicons share_alt"><i></i></span>Employment<a href="#phone-navbar" class="top visible-phone"></a></h2>
+			  	
+			  	<div class="timeline">
+			  		
+		  			 <div class="timeline-item">
+		  			 	<div class="timeline-item-date">2011 - now</div>
+		  			 	<div class="timeline-item-trigger"><span class="glyphicons white circle_plus" data-toggle="collapse" data-target="#position1"><i></i></span></div>
+		  			 	<div class="timeline-arrow"><i></i></div>
+		  			 	<div class="timeline-item-content">
+							<h3 class="timeline-item-title" data-toggle="collapse" data-target="#position1">Senior UX Designer @ Company</h3>
+							<div class="collapse in" id="position1">
+								<p><small class="muted">2011 - Present</small></p>
+								<h4 class="media-heading primary-color">Roles and Responsibilities</h4>
+								<p>Here is example text to illustrate the job description. Here is example text to illustrate the job description. Here is example text to illustrate the job description. Here is example text to illustrate the job description.</p>	
+								<p><a href="#" title="" >&rarr; View website</a></p>
+							</div>
+						</div>
+					 </div><!--/timeline-item--> 
+					 <span class="clear"></span>
+					 
+					 <div class="timeline-item">
+		  			 	<div class="timeline-item-date">2010 - 2011</div>
+		  			 	<div class="timeline-item-trigger"><span class="glyphicons white circle_plus" data-toggle="collapse" data-target="#position2"><i></i></span></div>
+		  			 	<div class="timeline-arrow"><i></i></div>
+		  			 	<div class="timeline-item-content">
+							<h3 class="timeline-item-title" data-toggle="collapse" data-target="#position2">Junior UX Designer @ Company</h3>
+							<div class="collapse" id="position2">
+								<p><small class="muted">from 2010 to 2011</small></p>
+								<h4 class="media-heading primary-color">Lorem ipsum dolor sit amet</h4>
+								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tincidunt diam ac lectus tristique scelerisque. Quisque vitae libero sit amet turpis faucibus auctor eget vitae tortor. Aenean metus erat, ultricies non mattis quis, molestie ac massa. Sed sollicitudin erat ac dui viverra a posuere eros adipiscing. Phasellus nisi lectus, imperdiet sed hendrerit ac, dictum quis sem. Phasellus vel nisi non massa elementum porta. Aliquam erat volutpat.adipiscing elit. Proin tincidunt diam ac lectus tristique scelerisque. Quisque vitae libero sit amet turpis faucibus auctor eget vitae tortor. Aenean metus erat, ultricies non mattis quis, molestie ac massa. Sed sollicitudin erat ac dui viverra a posuere eros adipiscing. Phasellus nisi lectus, imperdiet sed hendrerit ac, dictum quis sem. Phasellus vel nisi non massa elementum adipiscing elit. Proin tincidunt diam ac lectus tristique scelerisque. Quisque vitae libero sit amet turpis faucibus auctor eget vitae tortor. Aenean metus erat, ultricies non mattis quis, molestie ac massa. Sed sollicitudin erat ac dui viverra a posuere eros adipiscing. Phasellus nisi lectus, imperdiet sed hendrerit ac, dictum quis sem. Phasellus vel nisi non massa elementum </p>	
+							</div>
+						</div>
+					 </div><!--/timeline-item--> 
+					 <span class="clear"></span>
+					 
+					 <div class="timeline-item">
+		  			 	<div class="timeline-item-date">2009 - 2010</div>
+		  			 	<div class="timeline-item-trigger"><span class="glyphicons white circle_plus" data-toggle="collapse" data-target="#position3"><i></i></span></div>
+		  			 	<div class="timeline-arrow"><i></i></div>
+		  			 	<div class="timeline-item-content">
+							<h3 class="timeline-item-title" data-toggle="collapse" data-target="#position3">Webdesigner @ Studioprod</h3>
+							<div class="collapse" id="position3">
+								<p><small class="muted">from october 2009 to 2010</small></p>
+								<h4 class="media-heading primary-color">Lorem ipsum dolor sit amet</h4>
+								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tincidunt diam ac lectus tristique scelerisque. Quisque vitae libero sit amet turpis faucibus auctor eget vitae tortor. Aenean metus erat, ultricies non mattis quis, molestie ac massa. Sed sollicitudin erat ac dui viverra a posuere eros adipiscing. Phasellus nisi lectus, imperdiet sed hendrerit ac, dictum quis sem. Phasellus vel nisi non massa elementum porta. Aliquam erat volutpat.</p>	
+							</div>
+						</div>
+					 </div><!--/timeline-item--> 
+					 <span class="clear"></span>
+					 
+					 <div class="timeline-item">
+		  			 	<div class="timeline-item-date">2008 - 2009</div>
+		  			 	<div class="timeline-item-trigger"><span class="glyphicons white circle_plus" data-toggle="collapse" data-target="#position4"><i></i></span></div>
+		  			 	<div class="timeline-arrow"><i></i></div>
+		  			 	<div class="timeline-item-content">
+							<h3 class="timeline-item-title" data-toggle="collapse" data-target="#position4">Designer @ Creativecompany</h3>
+							<div class="collapse" id="position4">
+								<p><small class="muted">from 2008 to 2009</small></p>
+								<h4 class="media-heading primary-color">Lorem ipsum dolor sit amet</h4>
+								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tincidunt diam ac lectus tristique scelerisque. Quisque vitae libero sit amet turpis faucibus auctor eget vitae tortor. Aenean metus erat, ultricies non mattis quis, molestie ac massa. Sed sollicitudin erat ac dui viverra a posuere eros adipiscing. Phasellus nisi lectus, imperdiet sed hendrerit ac, dictum quis sem. Phasellus vel nisi non massa elementum porta. Aliquam erat volutpat.</p>	
+							</div>
+						</div>
+					 </div><!--/timeline-item--> 
+					 <span class="clear"></span>
+		  			 
+			  	</div><!--/timeline --> 
+			</div><!--/section-->
+		  	
+		  	
+		  	<div class="section" id="education">
+			  	<h2 class="section-title"><span class="glyphicons certificate"><i></i></span>Education</span></a></h2>
+			  		  	<% if @user.schools.any? %>
+      <ol class="schools">
+        <%= render @schools %>
+      </ol>
+      <%= will_paginate @schools %>
+    <% end %> 
+			  		  	
+		  	</div><!--/section-->
+		  
+		  	
+		 
+			
+			<div class="section" id="posts">
+		  		<h2 class="section-title"><span class="glyphicons notes"><i></i></span>Recent Posts (<%= @user.microposts.count %>)</a></h2>
+			  	
+			  	<div class="row">
+			  		<div class="span9">
+			  			 <% if @user.microposts.any? %>
+      <ol class="microposts">
+        <%= render @microposts %>
+      </ol>
+<%= will_paginate @microposts %>
+     <% else %> 
+    <% end %>
+
+			  		</div>
+			  	</div>
+			  	
+		  	</div><!--/section-->
+			
+			
+						
+				</div><!--/span9-->
+			
+			</div><!--/row-->
+			
+		</div>	
+					</div>	
+		</div><!--/section-->
+        <div id="message" class="modal hide fade in" style="display: none; ">  
+<div class="modal-header">  
+<a class="close" data-dismiss="modal">×</a>  
+<h4>Message <%= @user.name %></h4>
+</div>  
+<div class="modal-body">  
+<%= form_for @message, :url => user_messages_path(@user) do |f| %>
+  <p>
+    To:<br /><%= f.text_field :to, :placeholder => (@user.name) %>
+		<%= f.hidden_field :to, :value => (@user.email) %>
+		
+  </p>
+  <p>
+    Subject:<br />
+    <%= f.text_field :subject %>
+   
+    </p>
+    <p>
+      Message<br />
+      <%= f.text_area :body %>
+			
+    </p>
+    
+               
+</div>  
+<div class="modal-footer">   
+<a href="#" class="btn" data-dismiss="modal">Close</a>  
+<%= f.submit "Send", class: "btn btn-success" %>
+<% end %>   
+</div>  
+</div>    
+   
+
+
+		<div class="clear"></div>
+        <!-- END OF THE MAIN CONTENT -->
+        
+     
+<% end %>
+

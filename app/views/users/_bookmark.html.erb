@@ -1,0 +1,6 @@
+<%= form_for(current_user.bookmarks.build(bookmarked_id: @user.id)) do |f| %>
+<div><%= f.hidden_field :bookmarked_id %></div>
+ <%= button_tag do %>
+<div id="recommend" class="tips icon-btn-star" title="Recommend" data-placement="bottom"><a href="#" class="glyphicons white star"><i></i></a></div>
+<% end %>
+<% end %>

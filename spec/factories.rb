@@ -15,3 +15,11 @@ FactoryGirl.define do
         user
     end
 end
+    factory :school do
+        college: "College"
+        major: "Major"
+        student: "Student Type"
+        date: "Graduation Date"
+        user
+    end
+end

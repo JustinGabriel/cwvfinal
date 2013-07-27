@@ -1,21 +1,96 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <title><%= full_title(yield(:title)) %></title>
+<<<<<<< HEAD
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= content_for?(:title) ? yield(:title) : "CampusWeaver" %></title>
+=======
+    <title>Harper Classic 2013</title>
     <%= stylesheet_link_tag    "application", media: "all" %>
-    <%= javascript_include_tag "application" %>
+>>>>>>> 881ee705febd4004d6343ba22e02d84535086797
     <%= csrf_meta_tags %>
-    <%= render 'layouts/shim' %>    
-  </head>
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.1/html5shiv.js" type="text/javascript"></script>
+    <![endif]-->
+
+  <%= stylesheet_link_tag  "application", media: "all" %>
+<link href='http://fonts.googleapis.com/css?family=Lily+Script+One|Sofia' rel='stylesheet' type='text/css'>
+    
+         
+
+    <!-- For third-generation iPad with high-resolution Retina display: -->
+    <!-- Size should be 144 x 144 pixels -->
+    <%= favicon_link_tag 'images/apple-touch-icon-144x144-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '144x144' %>
+
+    <!-- For iPhone with high-resolution Retina display: -->
+    <!-- Size should be 114 x 114 pixels -->
+    <%= favicon_link_tag 'images/apple-touch-icon-114x114-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '114x114' %>
+
+    <!-- For first- and second-generation iPad: -->
+    <!-- Size should be 72 x 72 pixels -->
+    <%= favicon_link_tag 'images/apple-touch-icon-72x72-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '72x72' %>
+
+    <!-- For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
+    <!-- Size should be 57 x 57 pixels -->
+    <%= favicon_link_tag 'images/apple-touch-icon-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png' %>
+
+    <!-- For all other devices -->
+    <!-- Size should be 32 x 32 pixels -->
+    <%= favicon_link_tag 'favicon.ico', :rel => 'shortcut icon' %>
+
+    <script type="text/javascript" src="http://platform.linkedin.com/in.js">
+  api_key: ofa4k145r833
+</script>
+
+    </head>
 <body>
-    <%= render 'layouts/header' %>
+<<<<<<< HEAD
+
+<% if signed_in? %>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+        
+
+    
+  
+      <%= yield %>
+  
+    </div>
+     <% else %>
+     <%= render 'layouts/header' %>
+   
+=======
+  
     <div class="container">
+>>>>>>> 881ee705febd4004d6343ba22e02d84535086797
      <% flash.each do |key, value| %>
         <div class="alert alert-<%= key %>"><%= value %></div>
       <% end %>
       <%= yield %>
+<<<<<<< HEAD
+    
+=======
       <%= render 'layouts/footer' %>
+          <%= javascript_include_tag "application" %>
+>>>>>>> 881ee705febd4004d6343ba22e02d84535086797
       <%= debug(params) if Rails.env.development? %>
-    </div>
+<% end %>
+
+    <!-- Javascripts
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <%= javascript_include_tag "application" %>
+
+ 
   </body>
 </html>

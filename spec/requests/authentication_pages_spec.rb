@@ -105,6 +105,15 @@ describe "Authentication" do
                     before { visit followers_user_path(user) }
                     it { should have_selector('title', text: 'Sign in') }
                 end
+                describe "visiting the bookmarking page" do
+                    before { visit bookmarking_user_path(user) }
+                    it { should have_selector('title', text: 'Sign in') }
+                end
+                
+                describe "visiting the bookmarkers page" do
+                    before { visit bookmarking_user_path(user) }
+                    it { should have_selector('title', text: 'Sign in') }
+                end
             end
         end
         
@@ -121,18 +130,49 @@ describe "Authentication" do
             end
         end
         
-        describe "in the Relationships controller" do
+<<<<<<< HEAD
+        describe "in the Schools controller" do
             
             describe "submitting to the create action" do
-                before { post relationships_path }
+                before { post schools_path }
                 specify { response.should redirect_to(signin_path)}
             end
             
             describe "submitting to the destroy action" do
-                before { delete relationship_path(1) }
+                before { delete school_path(FactoryGirl.create(:school)) }
                 specify { response.should redirect_to(signin_path) }
             end
         end
+
+        describe "in the Relationships controller" do
+=======
+        describe "in the Bookmarks controller" do
+>>>>>>> 881ee705febd4004d6343ba22e02d84535086797
+            
+            describe "submitting to the create action" do
+                before { post bookmarks_path }
+                specify { response.should redirect_to(signin_path)}
+            end
+            
+            describe "submitting to the destroy action" do
+                before { delete bookmark_path(1) }
+                specify { response.should redirect_to(signin_path) }
+            end
+        end
+        
+        describe "in the Bookmarks controller" do
+            
+            describe "submitting to the create action" do
+                before { post bookmarks_path }
+                specify { response.should redirect_to(signin_path)}
+            end
+            
+            describe "submitting to the destroy action" do
+                before { delete bookmark_path(1) }
+                specify { response.should redirect_to(signin_path) }
+            end
+        end
+        
         
         describe "as wrong user" do
             let(:user) { FactoryGirl.create(:user) }

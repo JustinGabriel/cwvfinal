@@ -1,7 +1,14 @@
 <%= form_for(@micropost) do |f| %>
 <%= render 'shared/error_messages', object: f.object %>
 <div class="field">
-    <%= f.text_area :content, placeholder: "Compose new micropost..." %>
+<<<<<<< HEAD
+<%= render 'shared/error_messages', object: f.object %>
+    <%= f.text_area :content, placeholder: "Share an update..." %>
+     <%= f.hidden_field :network, value: @user.network %>
+=======
+    <%= f.text_area :author, class: "about",  placeholder: "Full Name" %>
+        <%= f.text_area :content, class: "about",  placeholder: "Place your wager (ex: Harper will be born on June 8th @ 2:15 am. Height: 19in. Weight: 7lbs 4oz.)" %>
+>>>>>>> 881ee705febd4004d6343ba22e02d84535086797
 </div>
-<%= f.submit "Post", class: "btn btn-large btn-primary" %>
+<%= f.submit "Post", class: "btn btn-success" %>
 <% end %>
