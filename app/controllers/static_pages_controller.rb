@@ -3,7 +3,6 @@ class StaticPagesController < ApplicationController
         if signed_in?
             @micropost  = current_user.microposts.build
             @feed_items = current_user.feed.paginate(page: params[:page])
-<<<<<<< HEAD
           @net_items = current_user.usernet.paginate(page: params[:page])
               @message = Message.new(params[:message])
             @user = current_user
@@ -13,9 +12,7 @@ class StaticPagesController < ApplicationController
             
             else
             redirect_to "/signup"
-=======
             @users_items = current_user.feed.paginate(page: params[:page])
->>>>>>> 881ee705febd4004d6343ba22e02d84535086797
         end
     end
  def index

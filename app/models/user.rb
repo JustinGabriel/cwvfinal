@@ -5,7 +5,6 @@ class User < ActiveRecord::Base
     has_many :bookmarks, foreign_key: "bookmarker_id", dependent: :destroy
     has_many :bookmarked_users, through: :bookmarks, source: :bookmarked
     has_many :microposts, dependent: :destroy
-<<<<<<< HEAD
     has_many :schools, dependent: :destroy
     has_many :relationships, foreign_key: "follower_id", dependent: :destroy
     has_many :followed_users, through: :relationships, source: :followed
@@ -17,7 +16,6 @@ class User < ActiveRecord::Base
     class_name:  "Bookmark",
     dependent:   :destroy
     has_many :bookmarkers, through: :reverse_bookmarks, source: :bookmarker
-=======
     has_many :bookmarks, foreign_key: "follower_id", dependent: :destroy
     has_many :followed_users, through: :bookmarks, source: :followed
     has_many :reverse_bookmarks, foreign_key: "followed_id",
@@ -25,7 +23,6 @@ class User < ActiveRecord::Base
     dependent: :destroy
     has_many :followers, through: :reverse_bookmarks, source: :follower
     
->>>>>>> 881ee705febd4004d6343ba22e02d84535086797
     before_save { |user| user.email = user.email.downcase }
     before_save :create_remember_token
     
@@ -39,7 +36,6 @@ class User < ActiveRecord::Base
 
 
     def following?(other_user)
-<<<<<<< HEAD
         relationships.find_by_followed_id(other_user.id)
      end
     
@@ -50,14 +46,12 @@ class User < ActiveRecord::Base
     
     def follow!(other_user)
         relationships.create!(followed_id: other_user.id)
-       
-=======
+
         bookmarks.find_by_followed_id(other_user.id)
     end
     
     def follow!(other_user)
         bookmarks.create!(followed_id: other_user.id)
->>>>>>> 881ee705febd4004d6343ba22e02d84535086797
     end
     def bookmark!(other_user)
         bookmarks.create!(bookmarked_id: other_user.id)
@@ -65,12 +59,10 @@ class User < ActiveRecord::Base
     end
 
     def unfollow!(other_user)
-<<<<<<< HEAD
         relationships.find_by_followed_id(other_user.id).destroy
        
-=======
         bookmarks.find_by_followed_id(other_user.id).destroy
->>>>>>> 881ee705febd4004d6343ba22e02d84535086797
+
     end
     def unbookmark!(other_user)
         bookmarks.find_by_bookmarked_id(other_user.id).destroy

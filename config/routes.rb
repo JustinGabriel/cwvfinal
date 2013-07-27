@@ -32,16 +32,11 @@ RailsinstallerOsxDemo::Application.routes.draw do
     end
     resources :sessions, only: [:new, :create, :destroy]
     resources :microposts, only: [:create, :destroy]
-<<<<<<< HEAD
     resources :schools, only: [:create, :destroy]
     resources :relationships, only: [:create, :destroy]
     resources :bookmarks, only: [:create, :destroy]
-  
-   
-  
-=======
+
     resources :bookmarks, only: [:create, :destroy]
->>>>>>> 881ee705febd4004d6343ba22e02d84535086797
     
     root to: 'static_pages#index'
     
@@ -50,13 +45,12 @@ RailsinstallerOsxDemo::Application.routes.draw do
     match '/signout',  to: 'sessions#destroy', via: :delete
     
     match '/home',    to: 'static_pages#home'
-<<<<<<< HEAD
+
     match '/index',    to: 'static_pages#index'
     match '/legal',    to: 'static_pages#legal'
-=======
+
     
     match '/help',    to: 'static_pages#help'
->>>>>>> 881ee705febd4004d6343ba22e02d84535086797
     match '/about',   to: 'static_pages#about'
     match '/contact', to: 'static_pages#contact'
     match '/recruiters', to: 'static_pages#recruiters'

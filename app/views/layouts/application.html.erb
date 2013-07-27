@@ -1,15 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-<<<<<<< HEAD
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= content_for?(:title) ? yield(:title) : "CampusWeaver" %></title>
-=======
     <title>Harper Classic 2013</title>
     <%= stylesheet_link_tag    "application", media: "all" %>
->>>>>>> 881ee705febd4004d6343ba22e02d84535086797
+
     <%= csrf_meta_tags %>
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
@@ -48,7 +46,7 @@
 
     </head>
 <body>
-<<<<<<< HEAD
+
 
 <% if signed_in? %>
 <div id="fb-root"></div>
@@ -69,20 +67,15 @@
      <% else %>
      <%= render 'layouts/header' %>
    
-=======
-  
-    <div class="container">
->>>>>>> 881ee705febd4004d6343ba22e02d84535086797
+
+
      <% flash.each do |key, value| %>
         <div class="alert alert-<%= key %>"><%= value %></div>
       <% end %>
       <%= yield %>
-<<<<<<< HEAD
-    
-=======
-      <%= render 'layouts/footer' %>
+
           <%= javascript_include_tag "application" %>
->>>>>>> 881ee705febd4004d6343ba22e02d84535086797
+
       <%= debug(params) if Rails.env.development? %>
 <% end %>
 

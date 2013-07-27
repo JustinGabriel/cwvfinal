@@ -11,7 +11,6 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
-<<<<<<< HEAD
 //= require jquery_ujs.js 
 //= require jquery/jquery.watermark.js
 //= require_tree 
@@ -69,11 +68,7 @@ $(function () {
 		$(function () {
 		$(".network").watermark("Join a network");
 		})
-=======
-//= require jquery_ujs
-//= require bootstrap
-//= require_tree .
->>>>>>> 881ee705febd4004d6343ba22e02d84535086797
+
   
 $('[placeholder]').focus(function() {
   var input = $(this);
@@ -97,7 +92,6 @@ $('[placeholder]').focus(function() {
 });
 
 
-<<<<<<< HEAD
 
 $('#bookmark').tooltip()
 $('#facebook').tooltip()
@@ -109,5 +103,4 @@ $('#add').tooltip()
 $('#delete').tooltip()
 $('#recommend').tooltip()
 
-=======
->>>>>>> 881ee705febd4004d6343ba22e02d84535086797
+
