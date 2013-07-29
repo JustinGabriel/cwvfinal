@@ -252,7 +252,7 @@ a:hover {
 }
 
 .dropdown-menu {
-	background-color: #FF6861;
+	background-color: #eaeaea;
 	color: #FFF;
 	border: 0px solid rgba(0, 0, 0, 0.1);
 	border-radius: 0px 0px 0px 0px;
@@ -396,7 +396,7 @@ a:hover {
 }
 
 #content2 {
-  background: url(../img/grid_noise.png) repeat;
+  background-image: url(grid_noise.png) repeat;
   background-color: #ebebeb;
   padding-top: 120px;
   padding-bottom: 120px;
@@ -775,14 +775,14 @@ select, input[type="text"], input[type="password"], input[type="datetime"], inpu
    Sign Up Page styles
    ========================================================================== */
 #signup {
-  background: url(../img/testimonial-bg.jpg) no-repeat;
+  background-image: url(testimonial-bg.jpg) no-repeat;
   background-size: cover;
   padding-top: 120px;
   padding-bottom: 120px;
 } 
 
 .signup {
-  background: url(../img/grid_noise.png) repeat;
+  background-image: url(grid_noise.png) repeat;
   background-color: #ebebeb;
   padding-top: 30px;
   margin-top: 22px;
@@ -898,8 +898,7 @@ ul.social-icons-signup li a:hover {
    Latest Work and Portfolio Styles
    ========================================================================== */
 #latest-work {
-  background: url(../img/grid_noise.png) repeat;
-  background-color: #ebebeb;
+  background-image: url('grid_noise.png') repeat;
   padding-top: 120px;
   padding-bottom: 120px;
 }

@@ -7,7 +7,6 @@ class UsersController < ApplicationController
         
     def index
         @users = User.paginate(page: params[:page])
-<<<<<<< HEAD
     @message = Message.all
           @user = current_user
       
@@ -35,7 +34,6 @@ class UsersController < ApplicationController
                      flash.now[:success] = "You're almost there. Complete your profile and get started networking."
         end
         end
-=======
         @micropost  = current_user.microposts.build
         @feed_items = current_user.feed.paginate(page: params[:page])
         @users_items = current_user.feed.paginate(page: params[:page])
@@ -44,7 +42,6 @@ class UsersController < ApplicationController
     
     def show
        redirect_to root_path
->>>>>>> 881ee705febd4004d6343ba22e02d84535086797
     end
     
     def new
